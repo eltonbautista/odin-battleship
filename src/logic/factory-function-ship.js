@@ -20,10 +20,7 @@ export const shipFactoryFunction = function shipFactoryFunction(length) {
   // This means that shipSunk() will need to be called every time hitShip() is called, that way it will be invoked properly.
   const shipSunk = function shipSunk(ship) {
     const stateOfShip = ship.reduce((prev, curr) => prev + curr);
-    // if (stateOfShip === 0) {
-    //   return 'The ship has sunk';
-    // }
-    // return shipArray;
+
     return stateOfShip;
   };
 
