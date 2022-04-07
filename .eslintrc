@@ -1,7 +1,7 @@
 {
   "extends": ["wesbos", "prettier/prettier"],
   "rules": {
-    "no-console": 2,
+    "no-console": "off",
     "prettier/prettier": [
       "error",
       {
