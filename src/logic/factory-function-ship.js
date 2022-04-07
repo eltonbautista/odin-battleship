@@ -4,6 +4,7 @@
 export const shipFactoryFunction = function shipFactoryFunction(length) {
   // length of ship is determined by an array.
   // The array will input x amount of 1s into the array depending on its desired length. e.g. patrol boat = [1, 1];
+  // shipArray being a public property is necessary because it will be used for the Gameboard. (determining position, etc.)
   const shipArray = [];
 
   // A helper function used to fill shipArray with 1s -> creates proper length, and has boolean used for 'hit' status.
