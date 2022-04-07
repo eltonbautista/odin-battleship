@@ -14,25 +14,32 @@ export const shipFactoryFunction = function shipFactoryFunction(length) {
   };
   fillArray();
 
+  // shipSunk() is a public method which tests for the shipArray's state. Once shipArray's indices have all been replaced with 0.
+  // shipSunk() will declare that the ship has sunk.
+  // This means that shipSunk() will need to be called every time hitShip() is called, that way it will be invoked properly.
+  const shipSunk = function shipSunk(ship) {
+    const stateOfShip = ship.reduce((prev, curr) => prev + curr);
+    // if (stateOfShip === 0) {
+    //   return 'The ship has sunk';
+    // }
+    // return shipArray;
+    return stateOfShip;
+  };
+
   // a public method which mutates shipArray. I think mutation is necessary here since the ship needs to change state.
   const hitShip = function hitShip(indexOfShip) {
     if (shipArray[indexOfShip] !== 0) {
       shipArray[indexOfShip] = 0;
     }
-    return shipArray;
-  };
-
-  const shipSunk = function shipSunk(ship) {
-    const stateOfShip = ship.reduce((prev, curr) => prev + curr);
-    if (stateOfShip === 0) {
-      return 'The ship has sunk';
+    if (shipSunk(shipArray) === 0) {
+      return 'the ship has sunk';
     }
+
     return shipArray;
   };
 
   return {
     shipArray,
     hitShip,
-    shipSunk,
   };
 };
