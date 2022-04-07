@@ -27,9 +27,14 @@ export const gameboardFactoryFunction = function gameboardFactoryFunction() {
     for (let i = 0; i < boat.shipArray.length; i += 1) {
       gameboardArray[coordinates[i]] = boat.shipArray[i];
     }
-    console.log(gameboardArray);
     return gameboardArray;
   };
+  // gameboardCoordinate will be a number from 0-99.
+  // We will then check what number is at gameboardCoordinate. If it's a 1, then it's a hit.
+  // If it's a 2 then it's not a hit. If it's a hit, then change that coordinate to a 0..
+  // Also somehow need to trigger hit();...
+  // receiveAttack takes a coord argument, determines whether or not the attack hit..
+  const receiveAttack = function receiveAttack(gameboardCoordinate) {};
 
   return {
     gameboardArray,
@@ -39,5 +44,6 @@ export const gameboardFactoryFunction = function gameboardFactoryFunction() {
     destroyer,
     submarine,
     patrolBoat,
+    receiveAttack,
   };
 };
