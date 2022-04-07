@@ -22,8 +22,17 @@ export const shipFactoryFunction = function shipFactoryFunction(length) {
     return shipArray;
   };
 
+  const shipSunk = function shipSunk(ship) {
+    const stateOfShip = ship.reduce((prev, curr) => prev + curr);
+    if (stateOfShip === 0) {
+      return 'The ship has sunk';
+    }
+    return shipArray;
+  };
+
   return {
     shipArray,
     hitShip,
+    shipSunk,
   };
 };
