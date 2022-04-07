@@ -2,11 +2,6 @@
 /* eslint-disable no-undef */
 import { shipFactoryFunction } from '../logic/factory-function-ship';
 
-// Test
-test('this is a test', () => {
-  expect(shipFactoryFunction(3).shipArray.length).toBe(3);
-});
-
 // Test for a ship with a length of 2
 test("Testing the ship's length", () => {
   expect(shipFactoryFunction(2).shipArray.length).toBe(2);
