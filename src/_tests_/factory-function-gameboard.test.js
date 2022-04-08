@@ -1,30 +1,52 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
+/* eslint-disable max-len */
+// /* eslint-disable comma-dangle */
+// /* eslint-disable no-undef */
+// /* eslint-disable no-console */
 import { gameboardFactoryFunction } from '../logic/factory-function-gameboard';
 // import { shipFactoryFunction } from '../logic/factory-function-ship';
 
 const testBoard = gameboardFactoryFunction();
-// const testTwoBoard = gameboardFactoryFunction(shipFactoryFunction(2));
-const pBoat = gameboardFactoryFunction();
-test('A test for placing the carrier ship at the correct "coordinates"', () => {
-  expect(
-    gameboardFactoryFunction().placeShip(testBoard.carrier, 0, 1, 2, 3, 4)
-  ).toEqual([
-    1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+// Tests for checking if the ships are placed at the correct coordinates.
+const x = testBoard.patrolBoat.hitShip;
+const y = testBoard.destroyer.hitShip;
+// prettier-ignore
+test('A test for placing the patrolBoat at the correct "coordinates"', () => {
+  expect(testBoard.placeShip(testBoard.patrolBoat, 3, 4)).toEqual([
+    2, 2, 2, x, x, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
   ]);
 });
+// prettier-ignore
 
-test('A test for placing the patrolBoat at the correct "coordinates"', () => {
-  expect(pBoat.placeShip(testBoard.patrolBoat, 3, 4)).toEqual([
-    2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+test('Testing the receive attack for patrolBoat', () => {
+  expect(testBoard.receiveAttack(3)).toEqual([
+    2, 2, 2, 0, x, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]);
-  pBoat.receiveAttack();
-  console.log(pBoat.gameboardArray);
+
+});
+//prettier-ignore
+test('Adding another ship onto the board', () => {
+  expect(testBoard.placeShip(testBoard.destroyer, 7, 8, 9)).toEqual([
+    2, 2, 2, 0, x, 2, 2, y, y, y, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+  ]);
+});
+//prettier-ignore
+test('Testing if shipSunk() works', () => {
+  expect(testBoard.receiveAttack(4)).toEqual([
+    2, 2, 2, 0, 0, 2, 2, y, y, y, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+  ]);
 });

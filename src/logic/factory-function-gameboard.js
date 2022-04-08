@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-console */
 import { shipFactoryFunction } from './factory-function-ship';
@@ -23,18 +24,29 @@ export const gameboardFactoryFunction = function gameboardFactoryFunction() {
 
   // This function takes two parameters: 1. a boat to place 2. a rest parameter "coordinates".
   // coordinates is used to place the boat on the gameboard.
-  const placeShip = function placeShip(boat, ...coordinates) {
-    for (let i = 0; i < boat.shipArray.length; i += 1) {
-      gameboardArray[coordinates[i]] = boat.shipArray[i];
+  // This actually doesn't put the ship object onto the board. i.e. shipArray is unaffected.
+  const placeShip = function placeShip(ship, ...coordinates) {
+    for (let i = 0; i < ship.shipArray.length; i += 1) {
+      if (gameboardArray[coordinates[i]] === 2) {
+        gameboardArray[coordinates[i]] = ship.shipArray[i];
+      } else {
+        return;
+      }
     }
+
+    // eslint-disable-next-line consistent-return
     return gameboardArray;
   };
-  // gameboardCoordinate will be a number from 0-99.
-  // We will then check what number is at gameboardCoordinate. If it's a 1, then it's a hit.
-  // If it's a 2 then it's not a hit. If it's a hit, then change that coordinate to a 0..
-  // Also somehow need to trigger hit();...
-  // receiveAttack takes a coord argument, determines whether or not the attack hit..
-  const receiveAttack = function receiveAttack(gameboardCoordinate) {};
+  // After a bunch of refactoring we have got a properly working receiveAttack() method.
+  // Basically hitShip() methods are placed into the appropriate coordinates.
+  // When that coordinate is hit, then hitShip() will trigger, SPECIFIC to the ship that was there.
+  // Since it's a SPECIFIC OBJECT'S METHOD it will apply to THAT object. --> this way we don't need to put coordinates into hitAttack().
+
+  const receiveAttack = function receiveAttack(gameboardCoordinate) {
+    gameboardArray[gameboardCoordinate]();
+    gameboardArray[gameboardCoordinate] = 0;
+    return gameboardArray;
+  };
 
   return {
     gameboardArray,
@@ -47,3 +59,11 @@ export const gameboardFactoryFunction = function gameboardFactoryFunction() {
     receiveAttack,
   };
 };
+
+// const foo = gameboardFactoryFunction();
+// foo.placeShip(foo.patrolBoat, 1, 2);
+// foo.placeShip(foo.destroyer, 6, 7, 8);
+// foo.gameboardArray[1]();
+// console.log(foo.gameboardArray);
+// console.log(foo.patrolBoat.hitShip());
+// console.log(foo.patrolBoat);

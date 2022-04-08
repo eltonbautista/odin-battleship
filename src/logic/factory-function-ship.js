@@ -8,33 +8,46 @@ export const shipFactoryFunction = function shipFactoryFunction(length) {
   const shipArray = [];
 
   // A helper function used to fill shipArray with 1s -> creates proper length, and has boolean used for 'hit' status.
-  const fillArray = function fillArray() {
-    for (let i = 0; i < length; i += 1) {
-      shipArray.push(1);
-    }
-  };
-  fillArray();
 
   // shipSunk() is a public method which tests for the shipArray's state. Once shipArray's indices have all been replaced with 0.
   // shipSunk() will declare that the ship has sunk.
   // This means that shipSunk() will need to be called every time hitShip() is called, that way it will be invoked properly.
   const shipSunk = function shipSunk(ship) {
     const stateOfShip = ship.reduce((prev, curr) => prev + curr);
-
     return stateOfShip;
   };
-
-  // a public method which mutates shipArray. I think mutation is necessary here since the ship needs to change state.
-  const hitShip = function hitShip(indexOfShip) {
-    if (shipArray[indexOfShip] !== 0) {
-      shipArray[indexOfShip] = 0;
+  // This function is used to add a 0 to the front of the array.
+  const unshiftZero = function unshiftZero(arr) {
+    if (arr[arr.length - 1] !== 0) {
+      return arr.unshift(0);
     }
+  };
+  // This function is used to remove a != 0 value from the end of the array.
+  const popNonZero = function popNonZero(arr) {
+    if (arr[arr.length - 1] !== 0) {
+      return arr.pop();
+    }
+  };
+  // a public method which mutates shipArray. I think mutation is necessary here since the ship needs to change state.
+  // Revised hitShip() what it does is calls two helper functions to add a 0 and remove a != 0 value from the shipArray.
+  // It also calls shipSunk(), so that once shipArray (our ship) is filled with all 0s (after all indice are hit), shipSunk() is triggered.
+  const hitShip = function hitShip() {
+    unshiftZero(shipArray);
+    popNonZero(shipArray);
     if (shipSunk(shipArray) === 0) {
+      console.log('Oh no! The ship has sunk!!');
       return 'the ship has sunk';
     }
 
     return shipArray;
   };
+
+  const fillArray = function fillArray() {
+    for (let i = 0; i < length; i += 1) {
+      shipArray.push(hitShip);
+    }
+  };
+  fillArray();
 
   return {
     shipArray,
