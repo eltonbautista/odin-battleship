@@ -17,12 +17,14 @@ export const shipFactoryFunction = function shipFactoryFunction(length) {
     return stateOfShip;
   };
   // This function is used to add a 0 to the front of the array.
+  // eslint-disable-next-line consistent-return
   const unshiftZero = function unshiftZero(arr) {
     if (arr[arr.length - 1] !== 0) {
       return arr.unshift(0);
     }
   };
   // This function is used to remove a != 0 value from the end of the array.
+  // eslint-disable-next-line consistent-return
   const popNonZero = function popNonZero(arr) {
     if (arr[arr.length - 1] !== 0) {
       return arr.pop();

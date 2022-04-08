@@ -41,10 +41,26 @@ export const gameboardFactoryFunction = function gameboardFactoryFunction() {
   // Basically hitShip() methods are placed into the appropriate coordinates.
   // When that coordinate is hit, then hitShip() will trigger, SPECIFIC to the ship that was there.
   // Since it's a SPECIFIC OBJECT'S METHOD it will apply to THAT object. --> this way we don't need to put coordinates into hitAttack().
-
+  // the if statement will allow .hit() to work only if != 0 and != 1. This means that only .hit() will only work in
+  // coordinates with a 2 (has not been shot/covered coordinate)
   const receiveAttack = function receiveAttack(gameboardCoordinate) {
-    gameboardArray[gameboardCoordinate]();
-    gameboardArray[gameboardCoordinate] = 0;
+    // prettier-ignore
+    if (
+      gameboardArray[gameboardCoordinate] !== 0
+      && gameboardArray[gameboardCoordinate] !== 1
+    ) {
+      gameboardArray[gameboardCoordinate]();
+      gameboardArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
+      return gameboardArray;
+    }
+    // prettier-ignore
+    if (
+      gameboardArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
+      && gameboardArray[gameboardCoordinate] === 2
+    ) {
+      gameboardArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
+      return gameboardArray;
+    }
     return gameboardArray;
   };
 

@@ -30,9 +30,8 @@ test('Testing the receive attack for patrolBoat', () => {
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]);
-
 });
-//prettier-ignore
+// prettier-ignore
 test('Adding another ship onto the board', () => {
   expect(testBoard.placeShip(testBoard.destroyer, 7, 8, 9)).toEqual([
     2, 2, 2, 0, x, 2, 2, y, y, y, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -41,7 +40,7 @@ test('Adding another ship onto the board', () => {
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]);
 });
-//prettier-ignore
+// prettier-ignore
 test('Testing if shipSunk() works', () => {
   expect(testBoard.receiveAttack(4)).toEqual([
     2, 2, 2, 0, 0, 2, 2, y, y, y, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
