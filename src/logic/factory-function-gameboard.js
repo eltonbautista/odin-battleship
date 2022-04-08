@@ -43,11 +43,15 @@ export const gameboardFactoryFunction = function gameboardFactoryFunction() {
   // Since it's a SPECIFIC OBJECT'S METHOD it will apply to THAT object. --> this way we don't need to put coordinates into hitAttack().
   // the if statement will allow .hit() to work only if != 0 and != 1. This means that only .hit() will only work in
   // coordinates with a 2 (has not been shot/covered coordinate)
+
+  // I think it would be best if we receiveAttack() is a function exclusively for triggering hit().
+  // Then another function can be made for missed shots. But then again having them together makes sense as well.
+  // Receive attack can just be for both cases because the whole gameboardArray and gameboard object is receiving the attack.
   const receiveAttack = function receiveAttack(gameboardCoordinate) {
     // prettier-ignore
     if (
       gameboardArray[gameboardCoordinate] !== 0
-      && gameboardArray[gameboardCoordinate] !== 1
+      && typeof gameboardArray[gameboardCoordinate] === 'function'
     ) {
       gameboardArray[gameboardCoordinate]();
       gameboardArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
