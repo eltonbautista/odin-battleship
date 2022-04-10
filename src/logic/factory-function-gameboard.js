@@ -1,18 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-console */
-import { shipFactoryFunction } from './factory-function-ship';
+import { Ship } from './factory-function-ship';
 
-export const gameboardFactoryFunction = function gameboardFactoryFunction() {
+export const Gameboard = function GameboardFactoryFunction() {
   const gameboardArray = [];
   // Here we are making the ship objects.
-  const myShips = [
-    shipFactoryFunction(5),
-    shipFactoryFunction(4),
-    shipFactoryFunction(3),
-    shipFactoryFunction(3),
-    shipFactoryFunction(2),
-  ];
+  const myShips = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
   const fillArray = function fillArray() {
     for (let i = 0; i < 100; i += 1) {
       gameboardArray.push(2);

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable max-len */
-export const shipFactoryFunction = function shipFactoryFunction(length) {
+export const Ship = function ShipFactoryFunction(length) {
   // length of ship is determined by an array.
   // The array will input x amount of 1s into the array depending on its desired length. e.g. patrol boat = [1, 1];
   // shipArray being a public property is necessary because it will be used for the Gameboard. (determining position, etc.)

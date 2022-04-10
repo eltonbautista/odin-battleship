@@ -5,10 +5,9 @@
 // /* eslint-disable comma-dangle */
 // /* eslint-disable no-undef */
 // /* eslint-disable no-console */
-import { gameboardFactoryFunction } from '../logic/factory-function-gameboard';
-// import { shipFactoryFunction } from '../logic/factory-function-ship';
+import { Gameboard } from '../logic/factory-function-gameboard';
 
-const testBoard = gameboardFactoryFunction();
+const testBoard = Gameboard();
 // Tests for checking if the ships are placed at the correct coordinates.
 const x = testBoard.patrolBoat.hitShip;
 const y = testBoard.destroyer.hitShip;
