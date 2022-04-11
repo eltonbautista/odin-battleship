@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable comma-dangle */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
@@ -23,13 +25,24 @@ export const Player = function playerFactoryFunction(player) {
     coordinatesArray.splice(randomIndex, 1);
     return randomVal;
   };
-  // We want to pass gameboard's receiveAttack into this function to use it in conjunction w/ getUniqueRandom.
-  //   const randomCoordinate = function randomCoordinate() {
-  //     return receiveAttack(getUniqueRandom());
-  //   };
+
+  // A method used to attack the human player's board.
+  // It takes three parameters, and changes the background color of the attacked cell.
+
+  const computerAttack = function computerAttack(
+    gameboard,
+    uniqueRandomNumber,
+    playerboardArray
+  ) {
+    const randomNum = uniqueRandomNumber();
+    console.log(randomNum);
+    gameboard.receiveAttack(randomNum);
+    playerboardArray[randomNum].style.background = 'rgb(250, 0, 0)';
+  };
 
   return {
     player,
     getUniqueRandom,
+    computerAttack,
   };
 };

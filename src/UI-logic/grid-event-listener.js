@@ -7,7 +7,8 @@ export const gridMouseEvents = function gridMouseEvents(
   computerGameboard,
   playerGameboard,
   getUniqueRandom,
-  playerCellsArray
+  playerCellsArray,
+  computerPlayer
 ) {
   //   const playerCellsArray = document.querySelectorAll('.player.cell');
 
@@ -15,7 +16,11 @@ export const gridMouseEvents = function gridMouseEvents(
     e.target.style.backgroundColor = 'rgb(250, 0, 50)';
     computerGameboard.receiveAttack(e.target.dataset.computer);
     setTimeout(
-      computerAttack(playerGameboard, getUniqueRandom, playerCellsArray),
+      computerPlayer.computerAttack(
+        playerGameboard,
+        getUniqueRandom,
+        playerCellsArray
+      ),
       5000
     );
   });
