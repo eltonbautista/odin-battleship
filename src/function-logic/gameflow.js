@@ -29,7 +29,7 @@ export const gameFlow = function gameFlow() {
     '#main-content > div:last-child > div'
   );
 
-  gridMouseEvents(
+  humanPlayer.gridMouseEvents(
     computerGrid,
     computerGameboard,
     playerGameboard,

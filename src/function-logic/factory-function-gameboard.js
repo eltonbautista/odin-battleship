@@ -56,6 +56,7 @@ export const Gameboard = function GameboardFactoryFunction() {
     });
     if (myShips.length === 0) {
       console.log('Game Over!');
+      return 'Game Over!';
     }
   };
 

@@ -39,9 +39,34 @@ export const Player = function playerFactoryFunction(player) {
     playerboardArray[randomNum].style.background = 'rgb(250, 0, 0)';
   };
 
+  const gridMouseEvents = function gridMouseEvents(
+    grid,
+    computerGameboard,
+    playerGameboard,
+    getUniqueRandom,
+    playerCellsArray,
+    computerPlayer
+  ) {
+    //   const playerCellsArray = document.querySelectorAll('.player.cell');
+
+    grid.addEventListener('click', (e) => {
+      e.target.style.backgroundColor = 'rgb(250, 0, 50)';
+      computerGameboard.receiveAttack(e.target.dataset.computer);
+      setTimeout(
+        computerPlayer.computerAttack(
+          playerGameboard,
+          getUniqueRandom,
+          playerCellsArray
+        ),
+        5000
+      );
+    });
+  };
+
   return {
     player,
     getUniqueRandom,
     computerAttack,
+    gridMouseEvents,
   };
 };
