@@ -9,8 +9,11 @@ export const gameFlow = function gameFlow() {
   const playerGrid = renderGrid(100, 'player');
   const computerGrid = renderGrid(100, 'computer');
 
-  const playerCellsArray = document.querySelectorAll('.player.cell');
-  const computerCellsArray = document.querySelector('.computer.cell');
+  const playerGameboard = Gameboard();
+  const computerGameboard = Gameboard();
 
-  gridMouseEvents(computerGrid);
+  //   const playerCellsArray = document.querySelectorAll('.player.cell');
+  //   const computerCellsArray = document.querySelectorAll('.computer.cell');
+
+  gridMouseEvents(computerGrid, computerGameboard);
 };
