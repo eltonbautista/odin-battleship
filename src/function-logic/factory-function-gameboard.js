@@ -42,6 +42,7 @@ export const Gameboard = function GameboardFactoryFunction() {
   // Then another function can be made for missed shots. But then again having them together makes sense as well.
   // Receive attack can just be for both cases because the whole gameboardArray and gameboard object is receiving the attack.
   const receiveAttack = function receiveAttack(gameboardCoordinate) {
+    console.log(`shot ${gameboardCoordinate}`);
     // prettier-ignore
     if (
       gameboardArray[gameboardCoordinate] !== 0
