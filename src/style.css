@@ -68,4 +68,9 @@
   #main-content > div > div {
     border: 1px solid white;
   }  
+
+  #main-content > div:last-child > div:hover {
+    background:rgb(52, 157, 206);
+    cursor: pointer;
+  }
   
