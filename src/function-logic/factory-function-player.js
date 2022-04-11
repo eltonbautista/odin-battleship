@@ -21,7 +21,6 @@ export const Player = function playerFactoryFunction(player) {
     const randomVal = coordinatesArray[randomIndex];
 
     coordinatesArray.splice(randomIndex, 1);
-    console.log(coordinatesArray);
     return randomVal;
   };
   // We want to pass gameboard's receiveAttack into this function to use it in conjunction w/ getUniqueRandom.

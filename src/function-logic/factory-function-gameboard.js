@@ -50,6 +50,7 @@ export const Gameboard = function GameboardFactoryFunction() {
     ) {
       gameboardArray[gameboardCoordinate]();
       gameboardArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
+
       return gameboardArray;
     }
     // prettier-ignore
@@ -60,6 +61,7 @@ export const Gameboard = function GameboardFactoryFunction() {
       gameboardArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
       return gameboardArray;
     }
+
     return gameboardArray;
   };
 
