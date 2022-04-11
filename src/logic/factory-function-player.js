@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 
-export const Player = function playerFactoryFunction(player, receiveAttack) {
+export const Player = function playerFactoryFunction(player) {
   // prettier-ignore
   const coordinatesArray = [];
   const numOfRandom = 100;
@@ -21,6 +21,7 @@ export const Player = function playerFactoryFunction(player, receiveAttack) {
     const randomVal = coordinatesArray[randomIndex];
 
     coordinatesArray.splice(randomIndex, 1);
+    console.log(coordinatesArray);
     return randomVal;
   };
   // We want to pass gameboard's receiveAttack into this function to use it in conjunction w/ getUniqueRandom.
