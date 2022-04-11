@@ -7,6 +7,7 @@ export const renderGrid = function renderGrid(gridSize, gridIdentifier) {
     for (let i = 0; i < gridSize; i += 1) {
       gridCells.push(document.createElement('div'));
       gridCells[i].setAttribute('class', `${gridIdentifier} cell`);
+      gridCells[i].setAttribute(`data-${gridIdentifier}`, `${i}`);
       gridContainer.append(gridCells[i]);
     }
   };
