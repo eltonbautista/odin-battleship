@@ -62,10 +62,10 @@
     width: 65%;
     height: 75%;
     background-color: rgb(4, 0, 255);
-    border: 7px solid black;
+    outline: 5px solid black;
   }
 
   #main-content > div > div {
-    outline: 1px solid white;
+    border: 1px solid white;
   }  
   
