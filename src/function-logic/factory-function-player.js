@@ -35,7 +35,6 @@ export const Player = function playerFactoryFunction(player) {
     playerboardArray
   ) {
     const randomNum = uniqueRandomNumber();
-    console.log(randomNum);
     gameboard.receiveAttack(randomNum);
     playerboardArray[randomNum].style.background = 'rgb(250, 0, 0)';
   };

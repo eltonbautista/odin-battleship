@@ -6,7 +6,13 @@ import { Ship } from './factory-function-ship';
 export const Gameboard = function GameboardFactoryFunction() {
   const gameboardArray = [];
   // Here we are making the ship objects.
-  const myShips = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+  const [carrier, battleship, destroyer, submarine, patrolBoat] = [
+    Ship(5),
+    Ship(4),
+    Ship(3),
+    Ship(3),
+    Ship(2),
+  ];
   const fillArray = function fillArray() {
     for (let i = 0; i < 100; i += 1) {
       gameboardArray.push(2);
@@ -14,7 +20,7 @@ export const Gameboard = function GameboardFactoryFunction() {
   };
   fillArray();
   // We define each ship object with a proper variable name, conducive of the Battleship game.
-  const [carrier, battleship, destroyer, submarine, patrolBoat] = myShips;
+  const myShips = [carrier, battleship, destroyer, submarine, patrolBoat];
 
   // This function takes two parameters: 1. a boat to place 2. a rest parameter "coordinates".
   // coordinates is used to place the boat on the gameboard.
@@ -41,8 +47,19 @@ export const Gameboard = function GameboardFactoryFunction() {
   // I think it would be best if we receiveAttack() is a function exclusively for triggering hit().
   // Then another function can be made for missed shots. But then again having them together makes sense as well.
   // Receive attack can just be for both cases because the whole gameboardArray and gameboard object is receiving the attack.
+
+  const checkIfGameOver = function checkIfGameOver() {
+    myShips.forEach((ship) => {
+      if (ship.shipArray.reduce((prev, curr) => prev + curr) === 0) {
+        myShips.splice(myShips.indexOf(ship), 1);
+      }
+    });
+    if (myShips.length === 0) {
+      console.log('Game Over!');
+    }
+  };
+
   const receiveAttack = function receiveAttack(gameboardCoordinate) {
-    console.log(`shot ${gameboardCoordinate}`);
     // prettier-ignore
     if (
       gameboardArray[gameboardCoordinate] !== 0
@@ -50,7 +67,7 @@ export const Gameboard = function GameboardFactoryFunction() {
     ) {
       gameboardArray[gameboardCoordinate]();
       gameboardArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
-
+      checkIfGameOver();
       return gameboardArray;
     }
     // prettier-ignore
@@ -64,6 +81,11 @@ export const Gameboard = function GameboardFactoryFunction() {
 
     return gameboardArray;
   };
+
+  // const gameboardStatus = function gameboardStatus() {
+  //   const stateOfGameboard = gameboardArray.reduce((prev, curr) => prev + curr);
+  //   return stateOfGameboard;
+  // };
 
   return {
     gameboardArray,

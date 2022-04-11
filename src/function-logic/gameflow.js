@@ -38,4 +38,8 @@ export const gameFlow = function gameFlow() {
     computerPlayer
   );
   computerGameboard.placeShip(computerGameboard.submarine, 0, 1, 2);
+  computerGameboard.placeShip(computerGameboard.carrier, 3, 4, 5, 6, 7);
+  computerGameboard.placeShip(computerGameboard.battleship, 8, 9, 10, 11);
+  computerGameboard.placeShip(computerGameboard.patrolBoat, 12, 13);
+  computerGameboard.placeShip(computerGameboard.destroyer, 14, 15, 16);
 };

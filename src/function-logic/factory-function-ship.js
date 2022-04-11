@@ -38,7 +38,7 @@ export const Ship = function ShipFactoryFunction(length) {
     popNonZero(shipArray);
     if (shipSunk(shipArray) === 0) {
       console.log('Oh no! The ship has sunk!!');
-      return 'the ship has sunk';
+      return 0;
     }
 
     return shipArray;
