@@ -4,7 +4,6 @@
 import { Gameboard } from './factory-function-gameboard';
 import { Player } from './factory-function-player';
 import { renderGrid } from '../UI-logic/render-grid';
-import { gridMouseEvents } from '../UI-logic/grid-event-listener';
 
 export const gameFlow = function gameFlow() {
   const humanPlayer = Player('human');
