@@ -45,4 +45,27 @@
       justify-self: center;
   }
 
+  /* MAIN CONTENT */
+  #main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+  }
+
+  #main-content > div {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    min-width: 550px;
+    min-height: 550px;
+    width: 65%;
+    height: 75%;
+    background-color: rgb(4, 0, 255);
+    border: 7px solid black;
+  }
+
+  #main-content > div > div {
+    outline: 1px solid white;
+  }  
   
