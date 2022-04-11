@@ -3,5 +3,7 @@
 import './style.css';
 // import { mainUI } from './UI-logic/main-UI';
 import { gameFlow } from './function-logic/gameflow';
+import { startMenu } from './UI-logic/start-menu';
 
 gameFlow();
+startMenu();

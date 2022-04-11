@@ -1,0 +1,1 @@
+const dragDropShip = function dragDropShip() {};
