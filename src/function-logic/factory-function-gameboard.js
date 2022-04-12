@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-console */
@@ -13,29 +14,49 @@ export const Gameboard = function GameboardFactoryFunction() {
     Ship(3),
     Ship(2),
   ];
-  const fillArray = function fillArray() {
-    for (let i = 0; i < 100; i += 1) {
-      gameboardArray.push(2);
-    }
-  };
-  fillArray();
+  // const fillArray = function fillArray() {
+  //   for (let i = 0; i < 100; i += 1) {
+  //     gameboardArray.push(2);
+  //   }
+  // };
+  // fillArray();
   // We define each ship object with a proper variable name, conducive of the Battleship game.
   const myShips = [carrier, battleship, destroyer, submarine, patrolBoat];
+
+  const renderGrid = function renderGrid(gridSize, gridIdentifier) {
+    const mainContent = document.querySelector('#main-content');
+    const gridContainer = document.createElement('div');
+    // const gridCells = [];
+    const populateGridContainer = function populateGridContainer() {
+      for (let i = 0; i < gridSize; i += 1) {
+        gameboardArray.push(document.createElement('div'));
+        gameboardArray[i].setAttribute('class', `${gridIdentifier} cell`);
+        gameboardArray[i].setAttribute(`data-${gridIdentifier}`, `${i}`);
+        gridContainer.append(gameboardArray[i]);
+      }
+    };
+    populateGridContainer();
+    mainContent.append(gridContainer);
+    return gridContainer;
+  };
 
   // This function takes two parameters: 1. a boat to place 2. a rest parameter "coordinates".
   // coordinates is used to place the boat on the gameboard.
   // This actually doesn't put the ship object onto the board. i.e. shipArray is unaffected.
-  const placeShip = function placeShip(ship, ...coordinates) {
+  const placeShip = function placeShip(gridArray, ship, ...coordinates) {
     for (let i = 0; i < ship.shipArray.length; i += 1) {
-      if (gameboardArray[coordinates[i]] === 2) {
-        gameboardArray[coordinates[i]] = ship.shipArray[i];
+      if (
+        gridArray[coordinates[i]] === 2 ||
+        typeof gridArray[coordinates[i] !== 'function']
+      ) {
+        gridArray[coordinates[i]] = ship.shipArray[i];
       } else {
         return;
       }
     }
 
     // eslint-disable-next-line consistent-return
-    return gameboardArray;
+    return gridArray;
   };
   // After a bunch of refactoring we have got a properly working receiveAttack() method.
   // Basically hitShip() methods are placed into the appropriate coordinates.
@@ -60,27 +81,28 @@ export const Gameboard = function GameboardFactoryFunction() {
     }
   };
 
-  const receiveAttack = function receiveAttack(gameboardCoordinate) {
+  const receiveAttack = function receiveAttack(gridArray, gameboardCoordinate) {
     // prettier-ignore
     if (
-      gameboardArray[gameboardCoordinate] !== 0
-      && typeof gameboardArray[gameboardCoordinate] === 'function'
+      gridArray[gameboardCoordinate] !== 0
+      && typeof gridArray[gameboardCoordinate] === 'function'
     ) {
-      gameboardArray[gameboardCoordinate]();
-      gameboardArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
+      gridArray[gameboardCoordinate]();
+      gridArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
       checkIfGameOver();
-      return gameboardArray;
+      console.log(gridArray)
+      return gridArray;
     }
     // prettier-ignore
     if (
-      gameboardArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
-      && gameboardArray[gameboardCoordinate] === 2
+      gridArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
+      && typeof gridArray[gameboardCoordinate] !== 'function'
     ) {
-      gameboardArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
-      return gameboardArray;
+      gridArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
+      return gridArray;
     }
 
-    return gameboardArray;
+    return gridArray;
   };
 
   // const gameboardStatus = function gameboardStatus() {
@@ -97,6 +119,7 @@ export const Gameboard = function GameboardFactoryFunction() {
     submarine,
     patrolBoat,
     receiveAttack,
+    renderGrid,
   };
 };
 
