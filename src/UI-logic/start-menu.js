@@ -52,6 +52,6 @@ export const startMenu = function startMenu() {
   };
   fillElements();
 
-  dragDropShip();
+  return myShipElements;
 };
 // startMenu();

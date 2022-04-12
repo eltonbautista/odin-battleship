@@ -106,7 +106,11 @@
     height: 50px;
   }
 
-  /* #player > .player--over {
+  #player > .player--over {
     border: 1px dotted yellow;
     background: green;
-  } */
+  }
+
+  #player > .player--dropped {
+    background: green;
+  }
