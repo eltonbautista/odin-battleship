@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
@@ -46,8 +47,9 @@ export const Gameboard = function GameboardFactoryFunction() {
   const placeShip = function placeShip(gridArray, ship, ...coordinates) {
     for (let i = 0; i < ship.shipArray.length; i += 1) {
       if (
-        gridArray[coordinates[i]] === 2 ||
-        typeof gridArray[coordinates[i] !== 'function']
+        // prettier-ignore
+        gridArray[coordinates[i]] === 2
+        || typeof gridArray[coordinates[i] !== 'function']
       ) {
         gridArray[coordinates[i]] = ship.shipArray[i];
       } else {
@@ -104,11 +106,6 @@ export const Gameboard = function GameboardFactoryFunction() {
     return gridArray;
   };
 
-  // const gameboardStatus = function gameboardStatus() {
-  //   const stateOfGameboard = gameboardArray.reduce((prev, curr) => prev + curr);
-  //   return stateOfGameboard;
-  // };
-
   return {
     gameboardArray,
     placeShip,
@@ -121,11 +118,3 @@ export const Gameboard = function GameboardFactoryFunction() {
     renderGrid,
   };
 };
-
-// const foo = gameboardFactoryFunction();
-// foo.placeShip(foo.patrolBoat, 1, 2);
-// foo.placeShip(foo.destroyer, 6, 7, 8);
-// foo.gameboardArray[1]();
-// console.log(foo.gameboardArray);
-// console.log(foo.patrolBoat.hitShip());
-// console.log(foo.patrolBoat);
