@@ -36,6 +36,7 @@ export const Gameboard = function GameboardFactoryFunction() {
         gridContainer.append(gameboardArray[i]);
       }
     };
+    gridContainer.setAttribute('id', `${gridIdentifier}`);
     populateGridContainer();
     mainContent.append(gridContainer);
     return gridContainer;
