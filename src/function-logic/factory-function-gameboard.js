@@ -90,7 +90,6 @@ export const Gameboard = function GameboardFactoryFunction() {
       gridArray[gameboardCoordinate]();
       gridArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
       checkIfGameOver();
-      console.log(gridArray)
       return gridArray;
     }
     // prettier-ignore

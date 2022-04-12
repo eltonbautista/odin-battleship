@@ -32,10 +32,10 @@ export const Player = function playerFactoryFunction(player) {
   const computerAttack = function computerAttack(
     gameboard,
     uniqueRandomNumber,
-    playerCellsArray
+    playerGrid
   ) {
     const randomNum = uniqueRandomNumber();
-    playerCellsArray[randomNum].style.background = 'rgb(250, 0, 0)';
+    playerGrid[randomNum].style.background = 'rgb(250, 0, 0)';
     gameboard.receiveAttack(gameboard.gameboardArray, randomNum);
   };
 
@@ -43,16 +43,15 @@ export const Player = function playerFactoryFunction(player) {
     gridContainer,
     computerGameboard,
     playerGameboard,
-    getUniqueRandom,
-    playerCellsArray,
+    uniqueRandomMethod,
+    playerGrid,
     computerPlayer,
     computerGameboardArray
   ) {
-    //   const playerCellsArray = document.querySelectorAll('.player.cell');
+    //   const playerGrid = document.querySelectorAll('.player.cell');
 
     gridContainer.addEventListener('click', (e) => {
       if (e.target.style.backgroundColor !== 'rgb(250, 0, 50)') {
-        console.log(e.target.style.backgroundColor);
         e.target.style.backgroundColor = 'rgb(250, 0, 50)';
         computerGameboard.receiveAttack(
           computerGameboardArray,
@@ -61,14 +60,12 @@ export const Player = function playerFactoryFunction(player) {
         setTimeout(
           computerPlayer.computerAttack(
             playerGameboard,
-            getUniqueRandom,
-            playerCellsArray
+            uniqueRandomMethod,
+            playerGrid
           ),
           5000
         );
       }
-
-      // console.log(computerGameboard);
     });
   };
 
