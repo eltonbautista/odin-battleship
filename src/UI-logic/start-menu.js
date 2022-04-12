@@ -7,7 +7,12 @@ export const startMenu = function startMenu() {
 
   const myShipElements = [];
 
-  const generateDivs = function (length, arrayIn, appendOnTo, attribute) {
+  const generateDivs = function generateDivs(
+    length,
+    arrayIn,
+    appendOnTo,
+    attribute
+  ) {
     for (let i = 0; i < length; i += 1) {
       arrayIn.push(document.createElement('div'));
       arrayIn[i].setAttribute(`data-${attribute}`, i);
