@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable import/prefer-default-export */
 export const startMenu = function startMenu() {
   const designateShipsDiv = document.querySelector('#start-menu');

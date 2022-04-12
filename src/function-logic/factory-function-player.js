@@ -32,34 +32,43 @@ export const Player = function playerFactoryFunction(player) {
   const computerAttack = function computerAttack(
     gameboard,
     uniqueRandomNumber,
-    playerboardArray
+    playerCellsArray
   ) {
     const randomNum = uniqueRandomNumber();
-    gameboard.receiveAttack(randomNum);
-    playerboardArray[randomNum].style.background = 'rgb(250, 0, 0)';
+    gameboard.receiveAttack(gameboard.gameboardArray, randomNum);
+    playerCellsArray[randomNum].style.background = 'rgb(250, 0, 0)';
   };
 
   const gridMouseEvents = function gridMouseEvents(
-    grid,
+    gridContainer,
     computerGameboard,
     playerGameboard,
     getUniqueRandom,
     playerCellsArray,
-    computerPlayer
+    computerPlayer,
+    computerGameboardArray
   ) {
     //   const playerCellsArray = document.querySelectorAll('.player.cell');
 
-    grid.addEventListener('click', (e) => {
-      e.target.style.backgroundColor = 'rgb(250, 0, 50)';
-      computerGameboard.receiveAttack(e.target.dataset.computer);
-      setTimeout(
-        computerPlayer.computerAttack(
-          playerGameboard,
-          getUniqueRandom,
-          playerCellsArray
-        ),
-        5000
-      );
+    gridContainer.addEventListener('click', (e) => {
+      if (e.target.style.backgroundColor !== 'rgb(250, 0, 50)') {
+        console.log(e.target.style.backgroundColor);
+        e.target.style.backgroundColor = 'rgb(250, 0, 50)';
+        computerGameboard.receiveAttack(
+          computerGameboardArray,
+          e.target.dataset.computer
+        );
+        setTimeout(
+          computerPlayer.computerAttack(
+            playerGameboard,
+            getUniqueRandom,
+            playerCellsArray
+          ),
+          5000
+        );
+      }
+
+      // console.log(computerGameboard);
     });
   };
 
