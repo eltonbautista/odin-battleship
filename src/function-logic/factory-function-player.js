@@ -35,8 +35,8 @@ export const Player = function playerFactoryFunction(player) {
     playerCellsArray
   ) {
     const randomNum = uniqueRandomNumber();
-    gameboard.receiveAttack(gameboard.gameboardArray, randomNum);
     playerCellsArray[randomNum].style.background = 'rgb(250, 0, 0)';
+    gameboard.receiveAttack(gameboard.gameboardArray, randomNum);
   };
 
   const gridMouseEvents = function gridMouseEvents(

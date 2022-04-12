@@ -26,7 +26,7 @@ export const gameFlow = function gameFlow() {
     computerGameboard,
     playerGameboard,
     humanPlayer.getUniqueRandom,
-    playerCellsArray,
+    playerGameboard.gameboardArray,
     computerPlayer,
     computerGameboard.gameboardArray
   );
@@ -67,5 +67,5 @@ export const gameFlow = function gameFlow() {
     15,
     16
   );
-  console.log(computerGameboard.gameboardArray);
+  // console.log(playerGameboard.gameboardArray);
 };
