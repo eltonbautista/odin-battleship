@@ -96,13 +96,13 @@ export const Gameboard = function GameboardFactoryFunction() {
       return gridArray;
     }
     // prettier-ignore
-    if (
-      gridArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
-      && typeof gridArray[gameboardCoordinate] !== 'function'
-    ) {
-      gridArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
-      return gridArray;
-    }
+    // if (
+    //   gridArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
+    //   && typeof gridArray[gameboardCoordinate] !== 'function'
+    // ) {
+    //   gridArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
+    //   return gridArray;
+    // }
 
     return gridArray;
   };
@@ -117,5 +117,6 @@ export const Gameboard = function GameboardFactoryFunction() {
     patrolBoat,
     receiveAttack,
     renderGrid,
+    myShips,
   };
 };
