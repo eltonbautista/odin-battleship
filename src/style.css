@@ -61,8 +61,12 @@
     min-height: 550px;
     width: 65%;
     height: 75%;
-    background-color: rgb(4, 0, 255);
+    background-color: rgba(0, 183, 255, 0.589);
     outline: 5px solid black;
+  }
+
+  #player > div, #computer > div {
+    background: rgb(155, 147, 147)
   }
 
   #main-content > div > div {
@@ -87,7 +91,7 @@
     grid-template-rows: repeat(5, 0.1fr);
     align-content: center;
     justify-content: center;
-    /* visibility: hidden; */
+    visibility: hidden;
   }
 
   #start-menu > div {
@@ -114,4 +118,20 @@
 
   #player > .player--dropped {
     background: green;
+  }
+
+  #computer > .cell--hit {
+    background-color: red;
+  }
+
+  #computer > .cell--miss {
+    background:rgba(52, 157, 206, 0);
+  }
+
+  #player > .cell--hit {
+    background-color: red;
+  }
+
+  #player > .cell--miss {
+    background:rgba(52, 157, 206, 0);
   }
