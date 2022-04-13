@@ -84,25 +84,36 @@ export const Gameboard = function GameboardFactoryFunction() {
     }
   };
 
-  const receiveAttack = function receiveAttack(gridArray, gameboardCoordinate) {
+  const highlightCell = function highlightCell(cell, className) {
+    cell.classList.add(`${className}`);
+  };
+
+  const receiveAttack = function receiveAttack(
+    gridArray,
+    gameboardCoordinate,
+    uIGrid
+  ) {
     // prettier-ignore
     if (
-      gridArray[gameboardCoordinate] !== 0
-      && typeof gridArray[gameboardCoordinate] === 'function'
+      gridArray[gameboardCoordinate] !== 0 &&
+      typeof gridArray[gameboardCoordinate] === 'function'
     ) {
+      // console.log(gridArray)
+
+      highlightCell(uIGrid[gameboardCoordinate], 'cell--hit');
       gridArray[gameboardCoordinate]();
       gridArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
       checkIfGameOver();
       return gridArray;
     }
     // prettier-ignore
-    // if (
-    //   gridArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
-    //   && typeof gridArray[gameboardCoordinate] !== 'function'
-    // ) {
-    //   gridArray[gameboardCoordinate] = 1; // shots sent at coordinates that have no ships (i.e. just water) will turn into a 1.
-    //   return gridArray;
-    // }
+    if (
+      gridArray[gameboardCoordinate] !== 1 // can't reshoot coordinates that have been shot
+      && typeof gridArray[gameboardCoordinate] !== 'function'
+    ) {
+      highlightCell(uIGrid[gameboardCoordinate], 'cell--miss');
+      return gridArray;
+    }
 
     return gridArray;
   };
