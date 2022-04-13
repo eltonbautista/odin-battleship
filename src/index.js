@@ -7,4 +7,4 @@ import { startMenu } from './UI-logic/start-menu';
 import { dragDropShip } from './UI-logic/drag-drop-ship';
 gameFlow();
 // startMenu();
-dragDropShip();
+dragDropShip(startMenu);
