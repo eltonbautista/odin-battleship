@@ -79,28 +79,30 @@ export const dragDropShip = function dragDropShip(
       cell.addEventListener('drop', (e) => {
         const shipId = e.dataTransfer.getData('text/plain');
         const droppedShip = document.getElementById(shipId);
+        const shipBeingDragged = draggableShips[draggableShips.indexOf(droppedShip)];
+
         cell.classList.remove('player--over');
 
-        if (
-          !cell.classList.contains('player--dropped')
+        if (myPlayerCells.indexOf(cell) !== 99
+        && !cell.classList.contains('player--dropped')
           && !myPlayerCells[
             myPlayerCells.indexOf(cell)
-              + draggableShips[draggableShips.indexOf(droppedShip)]
+              + shipBeingDragged
                 .childElementCount
               - 1
           ].classList.contains('player--dropped')
         ) {
           e.preventDefault();
           console.log(myPlayerCells.indexOf(cell));
-
-          // console.log(draggableShips.indexOf(droppedShip));
-          colorDroppedArea(
-            droppedShip.childElementCount,
-            cell,
-            'player--dropped',
-            draggableShips.indexOf(droppedShip)
-          );
-          hideShip(droppedShip);
+          if (myPlayerCells.indexOf(cell) < 99) {
+            colorDroppedArea(
+              droppedShip.childElementCount,
+              cell,
+              'player--dropped',
+              draggableShips.indexOf(droppedShip)
+            );
+            hideShip(droppedShip);
+          }
         }
       });
     }
