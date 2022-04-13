@@ -3,6 +3,8 @@
 /* eslint-disable import/prefer-default-export */
 import { Gameboard } from './factory-function-gameboard';
 import { Player } from './factory-function-player';
+import { dragDropShip } from '../UI-logic/drag-drop-ship';
+import { startMenu } from '../UI-logic/start-menu';
 
 export const gameFlow = function gameFlow() {
   const humanPlayer = Player('human');
@@ -26,9 +28,8 @@ export const gameFlow = function gameFlow() {
     computerGameboard,
     playerGameboard,
     humanPlayer.getUniqueRandom,
-    playerGameboard.gameboardArray,
-    computerPlayer,
-    computerGameboard.gameboardArray
+    playerCellsArray,
+    computerPlayer
   );
   computerGameboard.placeShip(
     computerGameboard.gameboardArray,
@@ -68,4 +69,50 @@ export const gameFlow = function gameFlow() {
     16
   );
   // console.log(playerGameboard.gameboardArray);
+
+  dragDropShip(
+    startMenu,
+    playerGameboard.placeShip,
+    playerGameboard.gameboardArray,
+    playerGameboard.myShips
+  );
+
+  // Test:
+  // playerGameboard.placeShip(
+  //   playerGameboard.gameboardArray,
+  //   playerGameboard.submarine,
+  //   0,
+  //   1,
+  //   2
+  // );
+  // playerGameboard.placeShip(
+  //   playerGameboard.gameboardArray,
+  //   playerGameboard.carrier,
+  //   3,
+  //   4,
+  //   5,
+  //   6,
+  //   7
+  // );
+  // playerGameboard.placeShip(
+  //   playerGameboard.gameboardArray,
+  //   playerGameboard.battleship,
+  //   8,
+  //   9,
+  //   10,
+  //   11
+  // );
+  // playerGameboard.placeShip(
+  //   playerGameboard.gameboardArray,
+  //   playerGameboard.patrolBoat,
+  //   12,
+  //   13
+  // );
+  // playerGameboard.placeShip(
+  //   playerGameboard.gameboardArray,
+  //   playerGameboard.destroyer,
+  //   14,
+  //   15,
+  //   16
+  // );
 };
