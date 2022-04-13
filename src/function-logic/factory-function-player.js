@@ -45,8 +45,7 @@ export const Player = function playerFactoryFunction(player) {
     playerGameboard,
     uniqueRandomMethod,
     playerGrid,
-    computerPlayer,
-    computerGameboardArray
+    computerPlayer
   ) {
     //   const playerGrid = document.querySelectorAll('.player.cell');
 
@@ -54,7 +53,7 @@ export const Player = function playerFactoryFunction(player) {
       if (e.target.style.backgroundColor !== 'rgb(250, 0, 50)') {
         e.target.style.backgroundColor = 'rgb(250, 0, 50)';
         computerGameboard.receiveAttack(
-          computerGameboardArray,
+          computerGameboard.gameboardArray,
           e.target.dataset.computer
         );
         setTimeout(
