@@ -93,7 +93,6 @@ export const dragDropShip = function dragDropShip(
           ].classList.contains('player--dropped')
         ) {
           e.preventDefault();
-          console.log(myPlayerCells.indexOf(cell));
           if (myPlayerCells.indexOf(cell) < 99) {
             colorDroppedArea(
               droppedShip.childElementCount,
