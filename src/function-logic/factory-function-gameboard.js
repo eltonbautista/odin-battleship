@@ -101,6 +101,7 @@ export const Gameboard = function GameboardFactoryFunction() {
       // console.log(gridArray)
 
       highlightCell(uIGrid[gameboardCoordinate], 'cell--hit');
+      uIGrid[gameboardCoordinate].classList.remove('player--dropped');
       gridArray[gameboardCoordinate]();
       gridArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
       checkIfGameOver();
