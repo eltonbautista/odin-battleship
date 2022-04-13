@@ -7,9 +7,16 @@
 /* eslint-disable import/prefer-default-export */
 // import { startMenu } from './start-menu';
 
-export const dragDropShip = function dragDropShip(startMenu) {
+// import { Gameboard } from "../function-logic/factory-function-gameboard";
+
+export const dragDropShip = function dragDropShip(
+  startMenu,
+  placeShip,
+  playerGrid,
+  myShips
+) {
   const draggableShips = startMenu();
-  // const dropGrid = document.querySelector('#player');
+  const dropGrid = document.querySelector('#player');
   const playerCellsArray = document.querySelectorAll(
     '#main-content > div:first-child > div'
   );
@@ -34,22 +41,27 @@ export const dragDropShip = function dragDropShip(startMenu) {
     const shipDroppedOnGrid = droppedShip;
     shipDroppedOnGrid.setAttribute('draggable', 'false');
     shipDroppedOnGrid.style.visibility = 'hidden';
-    draggableShips.splice(droppedShipIndex, 1);
-    console.log(draggableShips);
+    // draggableShips.splice(droppedShipIndex, 1);
+    // console.log(draggableShips);
   };
 
   const colorDroppedArea = function colorDroppedArea(
     length,
     startCell,
     addClass,
-    placeShip
+    // eslint-disable-next-line no-unused-vars
+    index
   ) {
+    const coordinateArr = [];
     for (let i = 0; i < length; i += 1) {
       myPlayerCells[myPlayerCells.indexOf(startCell) + i].classList.add(
         `${addClass}`
       );
-      // placeShip(playerGrid, myShips[i], ...coordinates)
+      coordinateArr.push(myPlayerCells.indexOf(startCell) + i);
     }
+    // carrier, battleship, destroyer, submarine, patrolBoat
+    placeShip(playerGrid, myShips[index], ...coordinateArr);
+    console.log(coordinateArr);
   };
 
   const makeDroppable = function makeDroppable() {
@@ -59,6 +71,7 @@ export const dragDropShip = function dragDropShip(startMenu) {
         cell.classList.add('player--over');
       });
 
+      // eslint-disable-next-line no-unused-vars
       cell.addEventListener('dragleave', (e) => {
         cell.classList.remove('player--over');
       });
@@ -66,14 +79,18 @@ export const dragDropShip = function dragDropShip(startMenu) {
       cell.addEventListener('drop', (e) => {
         if (cell.classList.contains('player--dropped') === false) {
           e.preventDefault();
+
           cell.classList.remove('player--over');
           const shipId = e.dataTransfer.getData('text/plain');
           const droppedShip = document.getElementById(shipId);
+          // console.log(draggableShips.indexOf(droppedShip));
           colorDroppedArea(
             droppedShip.childElementCount,
             cell,
-            'player--dropped'
+            'player--dropped',
+            draggableShips.indexOf(droppedShip)
           );
+          console.log(draggableShips.indexOf(droppedShip));
           hideShip(droppedShip);
         }
       });
@@ -101,3 +118,6 @@ export const dragDropShip = function dragDropShip(startMenu) {
 // const stringToNumber = function stringToNumber(num) {
 //   return parseInt(num);
 // };
+
+// eslint-disable-next-line max-len
+// For placing bot ships just use the random number function, then loop it and increment or decrement by 1. Then it would be like [45, 46, 47] / [0, 1], etc.

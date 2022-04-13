@@ -1,12 +1,9 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable import/prefer-default-export */
-import { dragDropShip } from './drag-drop-ship';
+// import { dragDropShip } from './drag-drop-ship';
 
 export const startMenu = function startMenu() {
   const designateShipsDiv = document.querySelector('#start-menu');
-  const gridCell = document.querySelector(
-    '#main-content > div:nth-child(1) > div:nth-child(1)'
-  );
 
   const myShipElements = [];
   const shipNames = [
