@@ -80,8 +80,13 @@ export const dragDropShip = function dragDropShip(
         const shipId = e.dataTransfer.getData('text/plain');
         const droppedShip = document.getElementById(shipId);
         const shipBeingDragged = draggableShips[draggableShips.indexOf(droppedShip)];
+        const shipHeadIndex = myPlayerCells.indexOf(cell);
 
         cell.classList.remove('player--over');
+
+        if ((shipHeadIndex % 10) + shipBeingDragged.childElementCount > 10) {
+          return;
+        }
 
         if (myPlayerCells.indexOf(cell) !== 99
         && !cell.classList.contains('player--dropped')
@@ -93,15 +98,14 @@ export const dragDropShip = function dragDropShip(
           ].classList.contains('player--dropped')
         ) {
           e.preventDefault();
-          if (myPlayerCells.indexOf(cell) < 99) {
-            colorDroppedArea(
-              droppedShip.childElementCount,
-              cell,
-              'player--dropped',
-              draggableShips.indexOf(droppedShip)
-            );
-            hideShip(droppedShip);
-          }
+
+          colorDroppedArea(
+            droppedShip.childElementCount,
+            cell,
+            'player--dropped',
+            draggableShips.indexOf(droppedShip)
+          );
+          hideShip(droppedShip);
         }
       });
     }
