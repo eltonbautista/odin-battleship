@@ -113,7 +113,7 @@
 
   #player > .player--over {
     border: 1px dotted yellow;
-    background: green;
+    background: blue;
   }
 
   #player > .player--dropped {

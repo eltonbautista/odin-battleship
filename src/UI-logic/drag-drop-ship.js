@@ -75,14 +75,24 @@ export const dragDropShip = function dragDropShip(
       cell.addEventListener('dragleave', (e) => {
         cell.classList.remove('player--over');
       });
-
+      // prettier-ignore
       cell.addEventListener('drop', (e) => {
-        if (cell.classList.contains('player--dropped') === false) {
-          e.preventDefault();
+        const shipId = e.dataTransfer.getData('text/plain');
+        const droppedShip = document.getElementById(shipId);
+        cell.classList.remove('player--over');
 
-          cell.classList.remove('player--over');
-          const shipId = e.dataTransfer.getData('text/plain');
-          const droppedShip = document.getElementById(shipId);
+        if (
+          !cell.classList.contains('player--dropped')
+          && !myPlayerCells[
+            myPlayerCells.indexOf(cell)
+              + draggableShips[draggableShips.indexOf(droppedShip)]
+                .childElementCount
+              - 1
+          ].classList.contains('player--dropped')
+        ) {
+          e.preventDefault();
+          console.log(myPlayerCells.indexOf(cell));
+
           // console.log(draggableShips.indexOf(droppedShip));
           colorDroppedArea(
             droppedShip.childElementCount,
@@ -90,7 +100,6 @@ export const dragDropShip = function dragDropShip(
             'player--dropped',
             draggableShips.indexOf(droppedShip)
           );
-          console.log(draggableShips.indexOf(droppedShip));
           hideShip(droppedShip);
         }
       });
@@ -98,26 +107,3 @@ export const dragDropShip = function dragDropShip(
   };
   makeDroppable();
 };
-// const changeBackgroundColor = function changeBackgroundColor(
-//   color,
-//   cell,
-//   length
-// ) {
-//   const cellArr = [];
-//   for (let i = 0; i < length; i += 1) {
-//     cellArr.push(cell + i);
-//   }
-
-//   cellArr.forEach((int) => {
-//     if (int >= 0 && int < 100) {
-//       playerCellsArray[int].style.backgroundColor = `${color}`;
-//     }
-//   });
-// };
-
-// const stringToNumber = function stringToNumber(num) {
-//   return parseInt(num);
-// };
-
-// eslint-disable-next-line max-len
-// For placing bot ships just use the random number function, then loop it and increment or decrement by 1. Then it would be like [45, 46, 47] / [0, 1], etc.
