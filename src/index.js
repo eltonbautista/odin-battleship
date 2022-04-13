@@ -5,6 +5,7 @@ import './style.css';
 import { gameFlow } from './function-logic/gameflow';
 import { startMenu } from './UI-logic/start-menu';
 import { dragDropShip } from './UI-logic/drag-drop-ship';
+
 gameFlow();
 // startMenu();
-dragDropShip(startMenu);
+// dragDropShip(startMenu);
