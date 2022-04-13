@@ -35,8 +35,12 @@ export const Player = function playerFactoryFunction(player) {
     playerCellsArray
   ) {
     const randomNum = uniqueRandomNumber();
-    playerCellsArray[randomNum].style.background = 'rgb(250, 0, 0)';
-    gameboard.receiveAttack(gameboard.gameboardArray, randomNum);
+    // playerCellsArray[randomNum].style.background = 'rgb(250, 0, 0)';
+    gameboard.receiveAttack(
+      gameboard.gameboardArray,
+      randomNum,
+      playerCellsArray
+    );
   };
 
   const gridMouseEvents = function gridMouseEvents(
@@ -45,16 +49,21 @@ export const Player = function playerFactoryFunction(player) {
     playerGameboard,
     uniqueRandomMethod,
     playerCellsArray,
+    computerCellsArray,
     computerPlayer
   ) {
     //   const playerCellsArray = document.querySelectorAll('.player.cell');
     // Attack the bot
     gridContainer.addEventListener('click', (e) => {
-      if (e.target.style.backgroundColor !== 'rgb(250, 0, 50)') {
+      if (
+        !e.target.classList.contains('cell--hit') &&
+        !e.target.classList.contains('cell--miss')
+      ) {
         // e.target.style.backgroundColor = 'rgb(250, 0, 50)';
         computerGameboard.receiveAttack(
           computerGameboard.gameboardArray,
-          e.target.dataset.computer
+          e.target.dataset.computer,
+          computerCellsArray
         );
         setTimeout(
           computerPlayer.computerAttack(

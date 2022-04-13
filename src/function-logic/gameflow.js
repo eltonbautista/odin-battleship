@@ -29,6 +29,7 @@ export const gameFlow = function gameFlow() {
     playerGameboard,
     humanPlayer.getUniqueRandom,
     playerCellsArray,
+    computerCellsArray,
     computerPlayer
   );
   computerGameboard.placeShip(
