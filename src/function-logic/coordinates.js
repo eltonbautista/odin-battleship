@@ -9,86 +9,81 @@ export const coordinatesGenerator = function coordinatesGenerator(
 ) {
   const shipBeingPlaced = computerGameboard.myShips;
   const computerGameboardArray = computerGameboard.gameboardArray;
-  const oneArray = [];
-  const fillArray = function fillArray() {
-    for (let i = 0; i < 100; i += 1) {
-      oneArray.push(i);
+  const firstHalf = [];
+  const secondHalf = [];
+  const fillArray = function fillArray(arr, length, from) {
+    for (let i = from; i < length; i += 1) {
+      arr.push(i);
     }
   };
-  fillArray();
+  fillArray(firstHalf, 50, 0);
+  fillArray(secondHalf, 100, 50);
 
-  const placeComputerShips = function (shipIndex, uNum, iterator) {
+  const placeComputerShips = function placeComputerShips(
+    shipIndex,
+    uNum,
+    iterator,
+    arr
+  ) {
     const coords = [];
-    for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
-      coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
-      uniqueNum += 10;
+    let realNum = uNum;
+    for (let i = 0; i < shipBeingPlaced[shipIndex].shipArray.length; i += 1) {
+      coords.push(arr.splice(arr.indexOf(realNum), 1));
+      console.log(realNum);
+      realNum += iterator;
     }
+    console.log(coords);
     computerGameboard.placeShip(
       computerGameboardArray,
-      shipBeingPlaced[j],
+      shipBeingPlaced[shipIndex],
       ...coords
     );
   };
 
   for (let j = 0; j < shipBeingPlaced.length; j += 1) {
-    let uniqueNum = oneArray[Math.floor(Math.random() * oneArray.length)]; // Chooses a random number.
+    // const uniqueNum = oneArray[Math.floor(Math.random() * oneArray.length)]; // Chooses a random number.
 
-    if (uniqueNum < 50 && shipBeingPlaced[j].shipArray.length > 3) {
-      // if uniqueNum < 50 (to make sure not to get out of bounds) & ship is either carrier or battleship
-      const coords = [];
-      for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
-        coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
-        uniqueNum += 10;
+    if (shipBeingPlaced[j].shipArray.length > 3) {
+      const uniqueNum =
+        firstHalf[Math.floor(Math.random() * Math.ceil(firstHalf.length / 2))];
+      placeComputerShips(j, uniqueNum, 10, firstHalf);
+    } else if (shipBeingPlaced[j].shipArray.length <= 3) {
+      const uniqueNum =
+        secondHalf[
+          Math.floor(Math.random() * Math.ceil(secondHalf.length / 2))
+        ];
+      if ((uniqueNum % 10) + shipBeingPlaced[j].shipArray.length > 10) {
+        const useThisNum = uniqueNum - shipBeingPlaced[j].shipArray.length;
+        placeComputerShips(j, useThisNum, 1, secondHalf);
+      } else {
+        const useThisNum = uniqueNum - shipBeingPlaced[j].shipArray.length;
+        placeComputerShips(j, useThisNum, 1, secondHalf);
       }
-      computerGameboard.placeShip(
-        computerGameboardArray,
-        shipBeingPlaced[j],
-        ...coords
-      );
-    } else if (
-      uniqueNum > 50 &&
-      (uniqueNum % 100) + shipBeingPlaced[j].shipArray.length * 10 > 100 &&
-      shipBeingPlaced[j].shipArray.length > 3
-    ) {
-      uniqueNum -= 10 * Math.ceil(shipBeingPlaced[j].shipArray.length / 2);
-      const coords = [];
-      for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
-        coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
-        uniqueNum += 10;
-      }
-      computerGameboard.placeShip(
-        computerGameboardArray,
-        shipBeingPlaced[j],
-        ...coords
-      );
-    } else if (
-      uniqueNum > 50 &&
-      (uniqueNum % 10) + shipBeingPlaced[j].shipArray.length > 10 &&
-      shipBeingPlaced[j].shipArray.length > 3
-    ) {
-      const coords = [];
-      for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
-        coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
-        uniqueNum += 1;
-      }
-      computerGameboard.placeShip(
-        computerGameboardArray,
-        shipBeingPlaced[j],
-        ...coords
-      );
-    } else {
-      uniqueNum -= shipBeingPlaced[j].shipArray.length;
-      const coords = [];
-      for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
-        coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
-        uniqueNum += 1;
-      }
-      computerGameboard.placeShip(
-        computerGameboardArray,
-        shipBeingPlaced[j],
-        ...coords
-      );
     }
+
+    //     if (uniqueNum < 50 && shipBeingPlaced[j].shipArray.length > 3) {
+    //       // if uniqueNum < 50 (to make sure not to get out of bounds) & ship is either carrier or battleship
+    //       placeComputerShips(j, uniqueNum, 10);
+    //     } else if (uniqueNum > 59 && shipBeingPlaced[j].shipArray.length > 3) {
+    //       const useThisNum =
+    //         uniqueNum - 10 * Math.ceil(shipBeingPlaced[j].shipArray.length + 1);
+    //       placeComputerShips(j, useThisNum, 10);
+    //     } else if (uniqueNum > 89 && shipBeingPlaced[j].shipArray.length > 3) {
+    //       const useThisNum =
+    //         uniqueNum - 10 * Math.ceil(shipBeingPlaced[j].shipArray.length + 1);
+    //       placeComputerShips(j, useThisNum, 10);
+    //     } else if (
+    //       uniqueNum > 50 &&
+    //       (uniqueNum % 10) + shipBeingPlaced[j].shipArray.length > 10 &&
+    //       shipBeingPlaced[j].shipArray.length <= 3
+    //     ) {
+    //       const useThisNum = uniqueNum - shipBeingPlaced[j].shipArray.length;
+    //       placeComputerShips(j, useThisNum, 1);
+    //     } else {
+    //       const useThisNum = uniqueNum - shipBeingPlaced[j].shipArray.length;
+    //       console.log(useThisNum);
+    //       placeComputerShips(j, useThisNum, 1);
+    //     }
+    //     console.log(oneArray.length);
   }
-  console.log(computerGameboard.gameboardArray);
 };

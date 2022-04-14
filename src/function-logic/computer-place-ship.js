@@ -64,7 +64,7 @@ export const computerPlaceShip = function computerPlaceShip(
         100
       ) {
         shipHeadIndex -=
-          10 * Math.ceil(shipBeingPlaced[i].shipArray.length / 2);
+          10 * Math.ceil(shipBeingPlaced[i].shipArray.length + 1);
         const coordinates = [];
         for (let j = 0; j < shipBeingPlaced[i].shipArray.length; j += 1) {
           coordinates.push(shipHeadIndex);
