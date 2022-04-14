@@ -81,10 +81,10 @@ export const dragDropShip = function dragDropShip(
         const droppedShip = document.getElementById(shipId);
         const shipBeingDragged = draggableShips[draggableShips.indexOf(droppedShip)];
         const shipHeadIndex = myPlayerCells.indexOf(cell);
-
+        const gridRowLength = 10;
         cell.classList.remove('player--over');
 
-        if ((shipHeadIndex % 10) + shipBeingDragged.childElementCount > 10) {
+        if ((shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount > gridRowLength) {
           return;
         }
 

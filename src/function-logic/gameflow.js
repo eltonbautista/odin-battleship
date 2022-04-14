@@ -5,6 +5,7 @@ import { Gameboard } from './factory-function-gameboard';
 import { Player } from './factory-function-player';
 import { dragDropShip } from '../UI-logic/drag-drop-ship';
 import { startMenu } from '../UI-logic/start-menu';
+import { computerPlaceShip } from './computer-place-ship';
 
 export const gameFlow = function gameFlow() {
   const humanPlayer = Player('human');
@@ -32,43 +33,43 @@ export const gameFlow = function gameFlow() {
     computerCellsArray,
     computerPlayer
   );
-  computerGameboard.placeShip(
-    computerGameboard.gameboardArray,
-    computerGameboard.submarine,
-    0,
-    1,
-    2
-  );
-  computerGameboard.placeShip(
-    computerGameboard.gameboardArray,
-    computerGameboard.carrier,
-    3,
-    4,
-    5,
-    6,
-    7
-  );
-  computerGameboard.placeShip(
-    computerGameboard.gameboardArray,
-    computerGameboard.battleship,
-    8,
-    9,
-    10,
-    11
-  );
-  computerGameboard.placeShip(
-    computerGameboard.gameboardArray,
-    computerGameboard.patrolBoat,
-    12,
-    13
-  );
-  computerGameboard.placeShip(
-    computerGameboard.gameboardArray,
-    computerGameboard.destroyer,
-    14,
-    15,
-    16
-  );
+  // computerGameboard.placeShip(
+  //   computerGameboard.gameboardArray,
+  //   computerGameboard.submarine,
+  //   0,
+  //   1,
+  //   2
+  // );
+  // computerGameboard.placeShip(
+  //   computerGameboard.gameboardArray,
+  //   computerGameboard.carrier,
+  //   3,
+  //   4,
+  //   5,
+  //   6,
+  //   7
+  // );
+  // computerGameboard.placeShip(
+  //   computerGameboard.gameboardArray,
+  //   computerGameboard.battleship,
+  //   8,
+  //   9,
+  //   10,
+  //   11
+  // );
+  // computerGameboard.placeShip(
+  //   computerGameboard.gameboardArray,
+  //   computerGameboard.patrolBoat,
+  //   12,
+  //   13
+  // );
+  // computerGameboard.placeShip(
+  //   computerGameboard.gameboardArray,
+  //   computerGameboard.destroyer,
+  //   14,
+  //   15,
+  //   16
+  // );
   // console.log(playerGameboard.gameboardArray);
 
   dragDropShip(
@@ -77,6 +78,8 @@ export const gameFlow = function gameFlow() {
     playerGameboard.gameboardArray,
     playerGameboard.myShips
   );
+
+  computerPlaceShip(computerPlayer.getUniqueRandom, computerGameboard);
 
   // Test:
   // playerGameboard.placeShip(
