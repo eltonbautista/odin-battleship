@@ -17,6 +17,19 @@ export const coordinatesGenerator = function coordinatesGenerator(
   };
   fillArray();
 
+  const placeComputerShips = function (shipIndex, uNum, iterator) {
+    const coords = [];
+    for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
+      coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
+      uniqueNum += 10;
+    }
+    computerGameboard.placeShip(
+      computerGameboardArray,
+      shipBeingPlaced[j],
+      ...coords
+    );
+  };
+
   for (let j = 0; j < shipBeingPlaced.length; j += 1) {
     let uniqueNum = oneArray[Math.floor(Math.random() * oneArray.length)]; // Chooses a random number.
 
@@ -32,7 +45,39 @@ export const coordinatesGenerator = function coordinatesGenerator(
         shipBeingPlaced[j],
         ...coords
       );
+    } else if (
+      uniqueNum > 50 &&
+      (uniqueNum % 100) + shipBeingPlaced[j].shipArray.length * 10 > 100 &&
+      shipBeingPlaced[j].shipArray.length > 3
+    ) {
+      uniqueNum -= 10 * Math.ceil(shipBeingPlaced[j].shipArray.length / 2);
+      const coords = [];
+      for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
+        coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
+        uniqueNum += 10;
+      }
+      computerGameboard.placeShip(
+        computerGameboardArray,
+        shipBeingPlaced[j],
+        ...coords
+      );
+    } else if (
+      uniqueNum > 50 &&
+      (uniqueNum % 10) + shipBeingPlaced[j].shipArray.length > 10 &&
+      shipBeingPlaced[j].shipArray.length > 3
+    ) {
+      const coords = [];
+      for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
+        coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
+        uniqueNum += 1;
+      }
+      computerGameboard.placeShip(
+        computerGameboardArray,
+        shipBeingPlaced[j],
+        ...coords
+      );
     } else {
+      uniqueNum -= shipBeingPlaced[j].shipArray.length;
       const coords = [];
       for (let i = 0; i < shipBeingPlaced[j].shipArray.length; i += 1) {
         coords.push(oneArray.splice(oneArray.indexOf(uniqueNum), 1));
@@ -45,4 +90,5 @@ export const coordinatesGenerator = function coordinatesGenerator(
       );
     }
   }
+  console.log(computerGameboard.gameboardArray);
 };
