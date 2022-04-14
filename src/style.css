@@ -91,7 +91,7 @@
     grid-template-rows: repeat(5, 0.1fr);
     align-content: center;
     justify-content: center;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
 
   #start-menu > div {

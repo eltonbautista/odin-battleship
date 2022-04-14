@@ -17,50 +17,82 @@ export const computerPlaceShip = function computerPlaceShip(
   console.log(shipBeingPlaced); // carrier, battleship, destroyer, submarine, patrolBoat
   for (let i = 0; i < shipBeingPlaced.length; i += 1) {
     let shipHeadIndex = uniqueRandomInt();
-    console.log(shipBeingPlaced[i].shipArray.length);
-    if (
-      (shipHeadIndex % gridTrackLength) + shipBeingPlaced[i].shipArray.length >
-        gridTrackLength ||
-      computerCells[shipHeadIndex].classList.contains('computer--dropped')
-    ) {
-      shipHeadIndex -= shipBeingPlaced[i].shipArray.length;
-      console.log(shipHeadIndex);
+    // if (
+    //   (shipHeadIndex % gridTrackLength) + shipBeingPlaced[i].shipArray.length >
+    //     gridTrackLength ||
+    //   computerCells[shipHeadIndex].classList.contains('computer--dropped')
+    // ) {
+    if (shipHeadIndex < 50) {
+      if (
+        (shipHeadIndex % gridTrackLength) +
+          shipBeingPlaced[i].shipArray.length >
+        gridTrackLength
+      ) {
+        shipHeadIndex -= shipBeingPlaced[i].shipArray.length;
+        const coordinates = [];
+        for (let j = 0; j < shipBeingPlaced[i].shipArray.length; j += 1) {
+          coordinates.push(shipHeadIndex);
+          computerCells[shipHeadIndex].classList.add('computer--dropped');
+          shipHeadIndex += j;
+        }
+        console.log(coordinates);
+        computerGameboard.placeShip(
+          computerGameboardArray,
+          shipBeingPlaced[i],
+          ...coordinates
+        );
+      } else {
+        const coordinates = [];
+        for (let j = 0; j < shipBeingPlaced[i].shipArray.length; j += 1) {
+          coordinates.push(shipHeadIndex);
+          computerCells[shipHeadIndex].classList.add('computer--dropped');
+          shipHeadIndex += j;
+        }
+        console.log(coordinates);
+        computerGameboard.placeShip(
+          computerGameboardArray,
+          shipBeingPlaced[i],
+          ...coordinates
+        );
+      }
     }
+    // }
 
-    if (
-      shipHeadIndex < 50 &&
-      (shipHeadIndex % gridTrackLength) + shipBeingPlaced.length <
-        gridTrackLength &&
-      !computerCells[shipHeadIndex].classList.contains('computer--dropped')
-    ) {
-      const coordinates = [];
-      for (let j = 0; j < shipBeingPlaced[i].length; j += 1) {
-        coordinates.push(shipHeadIndex + j);
-        computerGrid[shipHeadIndex + j].classList.add('computer--dropped');
+    if (shipHeadIndex > 50) {
+      if (
+        (shipHeadIndex % 100) + shipBeingPlaced[i].shipArray.length * 10 >
+        100
+      ) {
+        shipHeadIndex -=
+          10 * Math.ceil(shipBeingPlaced[i].shipArray.length / 2);
+        const coordinates = [];
+        for (let j = 0; j < shipBeingPlaced[i].shipArray.length; j += 1) {
+          coordinates.push(shipHeadIndex);
+          console.log(coordinates);
+          computerCells[shipHeadIndex].classList.add('computer--dropped');
+          shipHeadIndex += 10;
+        }
+        console.log(coordinates);
+        computerGameboard.placeShip(
+          computerGameboardArray,
+          shipBeingPlaced[i],
+          ...coordinates
+        );
+      } else {
+        const coordinates = [];
+        for (let j = 0; j < shipBeingPlaced[i].shipArray.length; j += 1) {
+          coordinates.push(shipHeadIndex);
+          computerCells[shipHeadIndex].classList.add('computer--dropped');
+          shipHeadIndex += 10;
+        }
+        console.log(coordinates);
+        computerGameboard.placeShip(
+          computerGameboardArray,
+          shipBeingPlaced[i],
+          ...coordinates
+        );
       }
-      console.log(coordinates);
-      computerGameboard.placeShip(
-        computerGameboardArray,
-        shipBeingPlaced[i],
-        ...coordinates
-      );
-    } else if (
-      shipHeadIndex > 50 &&
-      (shipHeadIndex % gridTrackLength) + shipBeingPlaced.length <
-        gridTrackLength &&
-      !computerCells[shipHeadIndex].classList.contains('computer--dropped')
-    ) {
-      const coordinates = [];
-      for (let j = 0; j < shipBeingPlaced[i].length; j += 1) {
-        coordinates.push((shipHeadIndex += 10));
-        computerGrid[coordinates].classList.add('computer--dropped');
-      }
-      computerGameboard.placeShip(
-        computerGameboardArray,
-        shipBeingPlaced[i],
-        ...coordinates
-      );
     }
   }
-  //   console.log(computerGameboardArray);
+  console.log(computerGameboardArray);
 };

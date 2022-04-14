@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Player } from '../logic/factory-function-player';
+import { Player } from '../function-logic/factory-function-player';
 
 const playerOne = Player('playerOne');
 

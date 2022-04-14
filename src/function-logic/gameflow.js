@@ -6,6 +6,7 @@ import { Player } from './factory-function-player';
 import { dragDropShip } from '../UI-logic/drag-drop-ship';
 import { startMenu } from '../UI-logic/start-menu';
 import { computerPlaceShip } from './computer-place-ship';
+import { coordinatesGenerator } from './coordinates';
 
 export const gameFlow = function gameFlow() {
   const humanPlayer = Player('human');
@@ -79,8 +80,10 @@ export const gameFlow = function gameFlow() {
     playerGameboard.myShips
   );
 
-  computerPlaceShip(computerPlayer.getUniqueRandom, computerGameboard);
-
+  // computerPlaceShip(computerPlayer.getUniqueRandom, computerGameboard);
+  coordinatesGenerator(computerGameboard);
+  // console.log(computerGameboard.gameboardArray);
+  // console.log(computerGameboard.gameboardArray);
   // Test:
   // playerGameboard.placeShip(
   //   playerGameboard.gameboardArray,
