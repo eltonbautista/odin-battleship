@@ -5,7 +5,6 @@ import { Gameboard } from './factory-function-gameboard';
 import { Player } from './factory-function-player';
 import { dragDropShip } from '../UI-logic/drag-drop-ship';
 import { startMenu } from '../UI-logic/start-menu';
-import { computerPlaceShip } from './computer-place-ship';
 import { coordinatesGenerator } from './coordinates';
 
 export const gameFlow = function gameFlow() {
@@ -34,44 +33,6 @@ export const gameFlow = function gameFlow() {
     computerCellsArray,
     computerPlayer
   );
-  // computerGameboard.placeShip(
-  //   computerGameboard.gameboardArray,
-  //   computerGameboard.submarine,
-  //   0,
-  //   1,
-  //   2
-  // );
-  // computerGameboard.placeShip(
-  //   computerGameboard.gameboardArray,
-  //   computerGameboard.carrier,
-  //   3,
-  //   4,
-  //   5,
-  //   6,
-  //   7
-  // );
-  // computerGameboard.placeShip(
-  //   computerGameboard.gameboardArray,
-  //   computerGameboard.battleship,
-  //   8,
-  //   9,
-  //   10,
-  //   11
-  // );
-  // computerGameboard.placeShip(
-  //   computerGameboard.gameboardArray,
-  //   computerGameboard.patrolBoat,
-  //   12,
-  //   13
-  // );
-  // computerGameboard.placeShip(
-  //   computerGameboard.gameboardArray,
-  //   computerGameboard.destroyer,
-  //   14,
-  //   15,
-  //   16
-  // );
-  // console.log(playerGameboard.gameboardArray);
 
   dragDropShip(
     startMenu,
@@ -80,46 +41,5 @@ export const gameFlow = function gameFlow() {
     playerGameboard.myShips
   );
 
-  // computerPlaceShip(computerPlayer.getUniqueRandom, computerGameboard);
   coordinatesGenerator(computerGameboard);
-  // console.log(computerGameboard.gameboardArray);
-  // console.log(computerGameboard.gameboardArray);
-  // Test:
-  // playerGameboard.placeShip(
-  //   playerGameboard.gameboardArray,
-  //   playerGameboard.submarine,
-  //   0,
-  //   1,
-  //   2
-  // );
-  // playerGameboard.placeShip(
-  //   playerGameboard.gameboardArray,
-  //   playerGameboard.carrier,
-  //   3,
-  //   4,
-  //   5,
-  //   6,
-  //   7
-  // );
-  // playerGameboard.placeShip(
-  //   playerGameboard.gameboardArray,
-  //   playerGameboard.battleship,
-  //   8,
-  //   9,
-  //   10,
-  //   11
-  // );
-  // playerGameboard.placeShip(
-  //   playerGameboard.gameboardArray,
-  //   playerGameboard.patrolBoat,
-  //   12,
-  //   13
-  // );
-  // playerGameboard.placeShip(
-  //   playerGameboard.gameboardArray,
-  //   playerGameboard.destroyer,
-  //   14,
-  //   15,
-  //   16
-  // );
 };
