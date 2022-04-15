@@ -1,3 +1,5 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable max-len */
 /* eslint-disable wrap-iife */
 /* eslint-disable radix */
 /* eslint-disable comma-dangle */
@@ -40,6 +42,42 @@ export const dragDropShip = function dragDropShip(
     }
   };
   makeDraggable();
+
+  const changeOrientation = function changeOrientation(
+    ship,
+    orientationName,
+    orientationDirection
+  ) {
+    const shipName = ship;
+
+    shipName.dataset.orientation = `${orientationName}`;
+    shipName.style.gridAutoFlow = `${orientationDirection}`;
+  };
+
+  // Add class "flippable" to each ship
+  // Add a double-click event listener, when they double click then change the grid-auto-flow.
+  // Flipping it to vertical (row) will change data-orientation to "vertical";
+  // Then at the bottom (when colorDroppedArea is called), if the ship still has data-orientation "vertical" then increment by 10 (so it's vertically placed)
+  // We can actually call placeShip in colorDroppedArea since once the place is shipped it can't change. No need to put it in start game button function
+  // Will need to add parameters so that it doesn't exceed outside of bounds (I think the one in computerPlaceShip will work here).
+  // Need one event listener, one will change it to vertical then it will remove itself and add the other eventlistener..?
+
+  const makeFlippable = function makeFlippable() {
+    for (const ship of draggableShips) {
+      ship.classList.add('flippable');
+      if (ship.classList.contains('flippable'));
+      {
+        ship.addEventListener('dblclick', (e) => {
+          if (ship.dataset.orientation === 'horizontal') {
+            changeOrientation(ship, 'vertical', 'row');
+          } else if (ship.dataset.orientation === 'vertical') {
+            changeOrientation(ship, 'horizontal', 'column');
+          }
+        });
+      }
+    }
+  };
+  makeFlippable();
 
   const hideShip = function hideShip(droppedShip) {
     const droppedShipIndex = draggableShips.indexOf(droppedShip);
@@ -101,7 +139,7 @@ export const dragDropShip = function dragDropShip(
         const gridRowLength = 10;
         cell.classList.remove('player--over');
 
-        if ((shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount > gridRowLength) {
+        if ((shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount > gridRowLength || (shipHeadIndex % 100) + shipBeingDragged.childElementCount > 100) {
           return;
         }
 
@@ -115,15 +153,28 @@ export const dragDropShip = function dragDropShip(
           ].classList.contains('player--dropped')
         ) {
           e.preventDefault();
+          console.log(droppedShip);
 
-          colorDroppedArea(
-            droppedShip.childElementCount,
-            cell,
-            'player--dropped',
-            draggableShips.indexOf(droppedShip),
-            1,
-            droppedShip.id
-          );
+          if (droppedShip.dataset.orientation === 'horizontal') {
+            colorDroppedArea(
+              droppedShip.childElementCount,
+              cell,
+              'player--dropped',
+              draggableShips.indexOf(droppedShip),
+              1,
+              droppedShip.id
+            );
+          } else if (droppedShip.dataset.orientation === 'vertical') {
+            colorDroppedArea(
+              droppedShip.childElementCount,
+              cell,
+              'player--dropped',
+              draggableShips.indexOf(droppedShip),
+              10,
+              droppedShip.id
+            );
+          }
+          droppedShip.classList.remove('flippable');
           hideShip(droppedShip);
         }
       });
