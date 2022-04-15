@@ -53,7 +53,6 @@ export const Player = function playerFactoryFunction(player) {
     computerCellsArray,
     computerPlayer
   ) {
-    //   const playerCellsArray = document.querySelectorAll('.player.cell');
     // Attack the bot
     // prettier-ignore
     gridContainer.addEventListener('click', (e) => {

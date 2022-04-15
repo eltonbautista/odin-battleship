@@ -34,8 +34,8 @@ export const gameFlow = function gameFlow() {
     computerPlayer
   );
 
-  dragDropShip(
-    startMenu,
+  playerGameboard.playerPlaceShip(
+    playerGameboard.beginGame,
     playerGameboard.placeShip,
     playerGameboard.gameboardArray,
     playerGameboard.myShips

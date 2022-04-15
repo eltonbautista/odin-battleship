@@ -29,6 +29,7 @@ export const coordinatesGenerator = function coordinatesGenerator(
     const coords = [];
     let realNum = uNum;
     for (let i = 0; i < shipBeingPlaced[shipIndex].shipArray.length; i += 1) {
+      upperHalfOfOneArray.splice(realNum, 1);
       coords.push(arr.splice(arr.indexOf(realNum), 1));
       console.log(realNum);
       realNum += iterator;

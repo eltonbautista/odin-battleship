@@ -8,7 +8,7 @@ export const startMenu = function startMenu() {
   const startMenuHeader = document.createElement('p');
   designateShipsDiv.append(startMenuHeader);
   startMenuHeader.textContent = '(Place your fleet!)';
-  const myShipElements = [];
+  let myShipElements = [];
   const shipNames = [
     'carrier',
     'battleship',
@@ -56,12 +56,17 @@ export const startMenu = function startMenu() {
   startGameButton.textContent = 'ゲームを始める';
   designateShipsDiv.append(startGameButton);
 
-  startGameButton.addEventListener('click', (e) => {
-    const emptyShipArray = myShipElements.filter((index) => index !== null);
-    if (emptyShipArray.length === 0) {
-      console.log('works');
-    }
-  });
+  const startGameFunction = function startGameFunction() {
+    startGameButton.addEventListener('click', (e) => {
+      const emptyShipArray = myShipElements.filter((index) => index !== null);
+      if (emptyShipArray.length === 0) {
+        designateShipsDiv.textContent = '';
+        designateShipsDiv.style.visibility = 'hidden';
+        myShipElements = emptyShipArray;
+      }
+    });
+  };
+  startGameFunction();
 
   return myShipElements;
 };

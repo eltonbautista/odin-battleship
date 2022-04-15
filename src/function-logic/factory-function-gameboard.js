@@ -4,6 +4,8 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-console */
 import { Ship } from './factory-function-ship';
+import { dragDropShip } from '../UI-logic/drag-drop-ship';
+import { startMenu } from '../UI-logic/start-menu';
 
 export const Gameboard = function GameboardFactoryFunction() {
   const gameboardArray = [];
@@ -119,16 +121,16 @@ export const Gameboard = function GameboardFactoryFunction() {
     return gridArray;
   };
 
+  const playerPlaceShip = dragDropShip;
+  const beginGame = startMenu;
+
   return {
     gameboardArray,
     placeShip,
-    carrier,
-    battleship,
-    destroyer,
-    submarine,
-    patrolBoat,
     receiveAttack,
     renderGrid,
     myShips,
+    playerPlaceShip,
+    beginGame,
   };
 };
