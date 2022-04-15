@@ -146,12 +146,12 @@
   }
 
   #player > .player--over {
-    border: 1px dotted yellow;
-    background: blue;
+    background: black;
   }
 
   #player > .player--dropped {
-    background: green;
+    background: black;
+    outline: 2px outset white;
   }
 
   #computer > .cell--hit {
