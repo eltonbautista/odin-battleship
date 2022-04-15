@@ -137,12 +137,12 @@ export const dragDropShip = function dragDropShip(
       increment += incrementor;
     }
     // carrier, battleship, destroyer, submarine, patrolBoat
-    // placeShip(playerGrid, myShips[index], ...coordinateArr);
     addShipClass(playerGrid, shipName, ...coordinateArr);
     droppedShip.classList.remove('flippable');
     console.log(droppedShip);
     showShip(droppedShip);
     hideShip(droppedShip);
+    placeShip(playerGrid, myShips[index], ...coordinateArr);
   };
 
   const makeDroppable = function makeDroppable() {
@@ -203,7 +203,7 @@ export const dragDropShip = function dragDropShip(
               droppedShip
             );
           }
-        }
+        } console.log(playerGrid);
       });
     }
   };

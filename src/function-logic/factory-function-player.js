@@ -75,6 +75,7 @@ export const Player = function playerFactoryFunction(player) {
           5000
         );
       }
+      console.log(playerGameboard);
     });
   };
 
