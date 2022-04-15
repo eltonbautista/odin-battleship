@@ -19,6 +19,7 @@ export const gameOver = function gameOver(player, gameFlow) {
     resetButton.remove();
     startMenu.style.visibility = 'visible';
     mainContent.textContent = '';
+    body.style.backgroundColor = 'white';
     gameFlow();
   });
 };
