@@ -13,6 +13,7 @@ export const gameFlow = function gameFlow() {
   const playerGameboard = Gameboard();
   const computerGameboard = Gameboard();
 
+  // eslint-disable-next-line no-unused-vars
   const playerGrid = playerGameboard.renderGrid(100, 'player');
   const computerGrid = computerGameboard.renderGrid(100, 'computer');
 

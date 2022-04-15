@@ -55,10 +55,11 @@ export const Player = function playerFactoryFunction(player) {
   ) {
     //   const playerCellsArray = document.querySelectorAll('.player.cell');
     // Attack the bot
+    // prettier-ignore
     gridContainer.addEventListener('click', (e) => {
       if (
-        !e.target.classList.contains('cell--hit') &&
-        !e.target.classList.contains('cell--miss')
+        !e.target.classList.contains('cell--hit')
+        && !e.target.classList.contains('cell--miss')
       ) {
         // e.target.style.backgroundColor = 'rgb(250, 0, 50)';
         computerGameboard.receiveAttack(
