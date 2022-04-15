@@ -4,7 +4,9 @@
 
 export const startMenu = function startMenu() {
   const designateShipsDiv = document.querySelector('#start-menu');
-
+  const startMenuHeader = document.createElement('p');
+  designateShipsDiv.append(startMenuHeader);
+  startMenuHeader.textContent = '(Place your fleet!)';
   const myShipElements = [];
   const shipNames = [
     'carrier',
