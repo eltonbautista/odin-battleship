@@ -102,7 +102,8 @@ export const dragDropShip = function dragDropShip(
     // eslint-disable-next-line no-unused-vars
     index,
     incrementor,
-    shipName
+    shipName,
+    droppedShip
   ) {
     const coordinateArr = [];
     let increment = 0;
@@ -116,6 +117,8 @@ export const dragDropShip = function dragDropShip(
     // carrier, battleship, destroyer, submarine, patrolBoat
     // placeShip(playerGrid, myShips[index], ...coordinateArr);
     addShipClass(playerGrid, shipName, ...coordinateArr);
+    droppedShip.classList.remove('flippable');
+    hideShip(droppedShip);
   };
 
   const makeDroppable = function makeDroppable() {
@@ -139,9 +142,9 @@ export const dragDropShip = function dragDropShip(
         const gridRowLength = 10;
         cell.classList.remove('player--over');
 
-        if ((shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount > gridRowLength || (shipHeadIndex % 100) + shipBeingDragged.childElementCount > 100) {
-          return;
-        }
+        // if ((shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount > gridRowLength && (shipHeadIndex % 100) + (shipBeingDragged.childElementCount-1) * 10 >= 100) {
+        //   return;
+        // }
 
         if (myPlayerCells.indexOf(cell) !== 99
         && !cell.classList.contains('player--dropped')
@@ -155,27 +158,28 @@ export const dragDropShip = function dragDropShip(
           e.preventDefault();
           console.log(droppedShip);
 
-          if (droppedShip.dataset.orientation === 'horizontal') {
+          if (droppedShip.dataset.orientation === 'horizontal' && (shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount <= gridRowLength) {
             colorDroppedArea(
               droppedShip.childElementCount,
               cell,
               'player--dropped',
               draggableShips.indexOf(droppedShip),
               1,
-              droppedShip.id
+              droppedShip.id,
+              droppedShip
             );
-          } else if (droppedShip.dataset.orientation === 'vertical') {
+          } else if (droppedShip.dataset.orientation === 'vertical' && (shipHeadIndex % 100) + (shipBeingDragged.childElementCount - 1) * 10 <= 100) {
             colorDroppedArea(
               droppedShip.childElementCount,
               cell,
               'player--dropped',
               draggableShips.indexOf(droppedShip),
               10,
-              droppedShip.id
+              droppedShip.id,
+              droppedShip
             );
           }
-          droppedShip.classList.remove('flippable');
-          hideShip(droppedShip);
+          console.log(playerGrid);
         }
       });
     }
