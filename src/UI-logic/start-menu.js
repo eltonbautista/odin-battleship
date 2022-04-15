@@ -3,6 +3,8 @@
 /* eslint-disable import/prefer-default-export */
 // import { dragDropShip } from './drag-drop-ship';
 
+// Renders the div and ships that are dragged onto the player's grid.
+
 export const startMenu = function startMenu() {
   const designateShipsDiv = document.querySelector('#start-menu');
   const startMenuHeader = document.createElement('p');

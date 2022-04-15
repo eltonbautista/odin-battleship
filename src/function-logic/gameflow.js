@@ -7,6 +7,7 @@ import { Player } from './factory-function-player';
 // import { startMenu } from '../UI-logic/start-menu';
 
 export const gameFlow = function gameFlow() {
+  // Instantiate necessary variables
   const humanPlayer = Player('human');
   const computerPlayer = Player('computer');
 

@@ -11,6 +11,7 @@ import { gameOver } from '../UI-logic/gameover';
 export const Gameboard = function GameboardFactoryFunction(player, reset) {
   const gameboardArray = [];
   // Here we are making the ship objects.
+  // Since we have predetermined ships, I decided to instantiate them here.
   const [carrier, battleship, destroyer, submarine, patrolBoat] = [
     Ship(5),
     Ship(4),
@@ -21,6 +22,7 @@ export const Gameboard = function GameboardFactoryFunction(player, reset) {
 
   const myShips = [carrier, battleship, destroyer, submarine, patrolBoat];
 
+  // Used to render the player grids.
   const renderGrid = function renderGrid(gridSize, gridIdentifier) {
     const mainContent = document.querySelector('#main-content');
     const gridContainer = document.createElement('div');
@@ -39,6 +41,7 @@ export const Gameboard = function GameboardFactoryFunction(player, reset) {
     return gridContainer;
   };
 
+  // A method that places ships onto the corresponding gameboard
   const placeShip = function placeShip(gridArray, ship, ...coordinates) {
     for (let i = 0; i < ship.shipArray.length; i += 1) {
       if (
@@ -55,7 +58,8 @@ export const Gameboard = function GameboardFactoryFunction(player, reset) {
     return gridArray;
   };
 
-  const checkIfGameOver = function checkIfGameOver() {
+  //
+  const checkIfGameOver = function _checkIfGameOver() {
     myShips.forEach((ship) => {
       if (ship.shipArray.reduce((prev, curr) => prev + curr) === 0) {
         myShips.splice(myShips.indexOf(ship), 1);
@@ -67,13 +71,15 @@ export const Gameboard = function GameboardFactoryFunction(player, reset) {
     }
   };
 
-  const highlightCell = function highlightCell(cell, className) {
+  const highlightCell = function _highlightCell(cell, className) {
     cell.classList.add(`${className}`);
   };
 
+  // When a coordinate with the hitShip function is hit, it will invoke it in this function.
   const receiveAttack = function receiveAttack(
     gridArray,
     gameboardCoordinate,
+    // eslint-disable-next-line comma-dangle
     uIGrid
   ) {
     // prettier-ignore
@@ -85,9 +91,7 @@ export const Gameboard = function GameboardFactoryFunction(player, reset) {
       uIGrid[gameboardCoordinate].classList.remove('player--dropped');
       gridArray[gameboardCoordinate]();
       gridArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
-      // if (checkIfGameOver() === 'Game Over!') {
-      //   return `${player} has lost!`
-      // }
+
       checkIfGameOver(reset);
       return gridArray;
     }

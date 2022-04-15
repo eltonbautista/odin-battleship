@@ -1,5 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 // import { gameFlow } from '../function-logic/gameflow';
+// A function that allows the player to reset the game.
+// It takes a player parameter, which is the player's name/id
+// Takes the gameFlow function which is essentially responsible for the whole project.
 
 export const gameOver = function gameOver(player, gameFlow) {
   const body = document.querySelector('body');

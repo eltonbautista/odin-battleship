@@ -53,7 +53,7 @@ export const Player = function playerFactoryFunction(player) {
     computerCellsArray,
     computerPlayer
   ) {
-    // Attack the bot
+    // Attack the computer board by clicking on it.
     // prettier-ignore
     gridContainer.addEventListener('click', (e) => {
       if (

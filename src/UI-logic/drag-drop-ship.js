@@ -18,21 +18,15 @@ export const dragDropShip = function dragDropShip(
   myShips
 ) {
   const draggableShips = startMenu();
-  const shipNames = [
-    'carrier',
-    'battleship',
-    'destroyer',
-    'submarine',
-    'patrolBoat',
-  ];
+
   // const dropGrid = document.querySelector('#player');
   const playerCellsArray = document.querySelectorAll(
     '#main-content > div:first-child > div'
   );
   const myPlayerCells = [...playerCellsArray];
   // eslint-disable-next-line no-restricted-syntax
-
-  const makeDraggable = function makeDraggable() {
+  // Make the ship elements draggable
+  const makeDraggable = function _makeDraggable() {
     for (const ship of draggableShips) {
       // eslint-disable-next-line no-loop-func
       if (draggableShips.indexOf(ship) !== 0) {
@@ -45,8 +39,8 @@ export const dragDropShip = function dragDropShip(
     }
   };
   makeDraggable();
-
-  const changeOrientation = function changeOrientation(
+  // A helper function to change the element's autoflow i.e. orientation
+  const changeOrientation = function _changeOrientation(
     ship,
     orientationName,
     orientationDirection
@@ -65,7 +59,7 @@ export const dragDropShip = function dragDropShip(
   // Will need to add parameters so that it doesn't exceed outside of bounds (I think the one in computerPlaceShip will work here).
   // Need one event listener, one will change it to vertical then it will remove itself and add the other eventlistener..?
 
-  const makeFlippable = function makeFlippable() {
+  const makeFlippable = function _makeFlippable() {
     for (const ship of draggableShips) {
       ship.classList.add('flippable');
       if (ship.classList.contains('flippable'));
@@ -81,8 +75,8 @@ export const dragDropShip = function dragDropShip(
     }
   };
   makeFlippable();
-
-  const showShip = function showShip(droppedShip) {
+  // A helper function that shows the next ship after the current ship is placed
+  const showShip = function _showShip(droppedShip) {
     if (droppedShip.id === 'patrolBoat') {
       droppedShip.classList.remove('ship--visible');
       droppedShip.classList.add('ship--hidden');
@@ -98,8 +92,8 @@ export const dragDropShip = function dragDropShip(
       'ship--visible'
     );
   };
-
-  const hideShip = function hideShip(droppedShip) {
+  // Hide the placed ships
+  const hideShip = function _hideShip(droppedShip) {
     const droppedShipIndex = draggableShips.indexOf(droppedShip);
     const shipDroppedOnGrid = droppedShip;
     shipDroppedOnGrid.setAttribute('draggable', 'false');
@@ -107,14 +101,16 @@ export const dragDropShip = function dragDropShip(
     // draggableShips.splice(droppedShipIndex, 1);
     draggableShips[droppedShipIndex] = null;
   };
-
-  const addShipClass = function addShipClass(grid, shipName, ...coords) {
+  // adds ship's class so that it can be distinguished
+  const addShipClass = function _addShipClass(grid, shipName, ...coords) {
     for (let i = 0; i < coords.length; i += 1) {
       grid[coords[i]].classList.add(`${shipName}`);
     }
   };
+  // When a ship is dropped onto the player's board after a drag event, it will invoke this function.
+  // Essentially it colors the proper cells, and places ships onto those cells.
 
-  const colorDroppedArea = function colorDroppedArea(
+  const colorDroppedArea = function _colorDroppedArea(
     length,
     startCell,
     addClass,
@@ -140,8 +136,9 @@ export const dragDropShip = function dragDropShip(
     hideShip(droppedShip);
     placeShip(playerGrid, myShips[index], ...coordinateArr);
   };
+  // Make the ship elements droppable onto player's grid.
 
-  const makeDroppable = function makeDroppable() {
+  const makeDroppable = function _makeDroppable() {
     for (const cell of myPlayerCells) {
       cell.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -175,7 +172,7 @@ export const dragDropShip = function dragDropShip(
           ].classList.contains('player--dropped')
         ) {
           e.preventDefault();
-
+          // Logic to prevent x-axis out of bounds
           if (droppedShip.dataset.orientation === 'horizontal' && (shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount <= gridRowLength) {
             colorDroppedArea(
               droppedShip.childElementCount,
@@ -185,7 +182,7 @@ export const dragDropShip = function dragDropShip(
               1,
               droppedShip.id,
               droppedShip
-            );
+            ); // Logic to prevent y-axis out of bounds
           } else if (droppedShip.dataset.orientation === 'vertical' && (shipHeadIndex % 100) + (shipBeingDragged.childElementCount - 1) * 10 <= 100) {
             colorDroppedArea(
               droppedShip.childElementCount,
