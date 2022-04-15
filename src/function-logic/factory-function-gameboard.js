@@ -17,13 +17,7 @@ export const Gameboard = function GameboardFactoryFunction() {
     Ship(3),
     Ship(2),
   ];
-  // const fillArray = function fillArray() {
-  //   for (let i = 0; i < 100; i += 1) {
-  //     gameboardArray.push(2);
-  //   }
-  // };
-  // fillArray();
-  // We define each ship object with a proper variable name, conducive of the Battleship game.
+
   const myShips = [carrier, battleship, destroyer, submarine, patrolBoat];
 
   const renderGrid = function renderGrid(gridSize, gridIdentifier) {
@@ -44,9 +38,6 @@ export const Gameboard = function GameboardFactoryFunction() {
     return gridContainer;
   };
 
-  // This function takes two parameters: 1. a boat to place 2. a rest parameter "coordinates".
-  // coordinates is used to place the boat on the gameboard.
-  // This actually doesn't put the ship object onto the board. i.e. shipArray is unaffected.
   const placeShip = function placeShip(gridArray, ship, ...coordinates) {
     for (let i = 0; i < ship.shipArray.length; i += 1) {
       if (
@@ -59,20 +50,9 @@ export const Gameboard = function GameboardFactoryFunction() {
         return;
       }
     }
-
     // eslint-disable-next-line consistent-return
     return gridArray;
   };
-  // After a bunch of refactoring we have got a properly working receiveAttack() method.
-  // Basically hitShip() methods are placed into the appropriate coordinates.
-  // When that coordinate is hit, then hitShip() will trigger, SPECIFIC to the ship that was there.
-  // Since it's a SPECIFIC OBJECT'S METHOD it will apply to THAT object. --> this way we don't need to put coordinates into hitAttack().
-  // the if statement will allow .hit() to work only if != 0 and != 1. This means that only .hit() will only work in
-  // coordinates with a 2 (has not been shot/covered coordinate)
-
-  // I think it would be best if we receiveAttack() is a function exclusively for triggering hit().
-  // Then another function can be made for missed shots. But then again having them together makes sense as well.
-  // Receive attack can just be for both cases because the whole gameboardArray and gameboard object is receiving the attack.
 
   const checkIfGameOver = function checkIfGameOver() {
     myShips.forEach((ship) => {
@@ -100,8 +80,6 @@ export const Gameboard = function GameboardFactoryFunction() {
       gridArray[gameboardCoordinate] !== 0 &&
       typeof gridArray[gameboardCoordinate] === 'function'
     ) {
-      // console.log(gridArray)
-
       highlightCell(uIGrid[gameboardCoordinate], 'cell--hit');
       uIGrid[gameboardCoordinate].classList.remove('player--dropped');
       gridArray[gameboardCoordinate]();
@@ -117,7 +95,6 @@ export const Gameboard = function GameboardFactoryFunction() {
       highlightCell(uIGrid[gameboardCoordinate], 'cell--miss');
       return gridArray;
     }
-
     return gridArray;
   };
 

@@ -9,11 +9,9 @@ export const coordinatesGenerator = function coordinatesGenerator(
 ) {
   const shipBeingPlaced = computerGameboard.myShips;
   const computerGameboardArray = computerGameboard.gameboardArray;
-  // const firstHalf = [];
-  // const secondHalf = [];
   const oneArray = [];
-  const fillArray = function fillArray(arr, length, from) {
-    for (let i = from; i < length; i += 1) {
+  const fillArray = function fillArray(arr, length, startingInt) {
+    for (let i = startingInt; i < length; i += 1) {
       arr.push(i);
     }
   };
@@ -43,8 +41,6 @@ export const coordinatesGenerator = function coordinatesGenerator(
   };
   // prettier-ignore
   for (let j = 0; j < shipBeingPlaced.length; j += 1) {
-    // const uniqueNum = oneArray[Math.floor(Math.random() * oneArray.length)]; // Chooses a random number.
-
     if (shipBeingPlaced[j].shipArray.length > 3) {
       const uniqueNum = oneArray[Math.floor(Math.random() * Math.ceil(oneArray.length / 10))];
       placeComputerShips(j, uniqueNum, 10, oneArray);

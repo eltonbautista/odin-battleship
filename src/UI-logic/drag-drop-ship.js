@@ -33,8 +33,6 @@ export const dragDropShip = function dragDropShip(
     }
   };
   makeDraggable();
-  // Okay so basically the user will drag a ship onto one of the cells, but there needs to be enough
-  // adjacent cells beside the cell it's dropped on, so that it will properly drop.
 
   const hideShip = function hideShip(droppedShip) {
     const droppedShipIndex = draggableShips.indexOf(droppedShip);
