@@ -51,6 +51,10 @@ export const startMenu = function startMenu() {
   };
   fillElements();
 
+  const startGameButton = document.createElement('button');
+  startGameButton.textContent = 'ゲームを始める';
+  designateShipsDiv.append(startGameButton);
+
   return myShipElements;
 };
 // startMenu();

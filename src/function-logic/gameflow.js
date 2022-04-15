@@ -5,7 +5,6 @@ import { Gameboard } from './factory-function-gameboard';
 import { Player } from './factory-function-player';
 import { dragDropShip } from '../UI-logic/drag-drop-ship';
 import { startMenu } from '../UI-logic/start-menu';
-import { coordinatesGenerator } from './coordinates-module-for-Player';
 
 export const gameFlow = function gameFlow() {
   const humanPlayer = Player('human');
