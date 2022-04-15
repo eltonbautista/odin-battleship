@@ -33,7 +33,10 @@ export const startMenu = function startMenu() {
       }
     }
   };
+
   generateDivs(5, myShipElements, designateShipsDiv, 'shipelement', 1);
+  // prettier-ignore
+  myShipElements.forEach((ship) => ship.setAttribute('data-orientation', 'horizontal'));
 
   const [
     carrierElement,
