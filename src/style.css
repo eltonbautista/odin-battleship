@@ -67,6 +67,9 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center;
+    font-size: 100px;
+    color: red;
+    font-weight: 600;
   }
 
   #main-content > div {

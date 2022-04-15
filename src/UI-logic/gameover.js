@@ -2,14 +2,12 @@
 // import { gameFlow } from '../function-logic/gameflow';
 
 export const gameOver = function gameOver(player, gameFlow) {
+  const body = document.querySelector('body');
   const mainContent = document.querySelector('#main-content');
   const startMenu = document.querySelector('#start-menu');
   mainContent.textContent = `${player} has lost!`;
   mainContent.style.backgroundColor = 'black';
-  mainContent.style.color = 'red';
-  mainContent.style.fontFamily = 'noto-sans-japanese';
-  mainContent.style.fontSize = '50px';
-
+  body.style.backgroundColor = 'black';
   const resetButton = document.createElement('button');
   resetButton.textContent = 'Play Again';
   mainContent.append(resetButton);

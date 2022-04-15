@@ -83,7 +83,6 @@ export const dragDropShip = function dragDropShip(
   makeFlippable();
 
   const showShip = function showShip(droppedShip) {
-    console.log(droppedShip.id);
     if (droppedShip.id === 'patrolBoat') {
       droppedShip.classList.remove('ship--visible');
       droppedShip.classList.add('ship--hidden');
@@ -92,7 +91,6 @@ export const dragDropShip = function dragDropShip(
 
     droppedShip.classList.remove('ship--visible');
     droppedShip.classList.add('ship--hidden');
-    console.log(draggableShips[draggableShips.indexOf(droppedShip) + 1]);
     draggableShips[draggableShips.indexOf(droppedShip) + 1].classList.remove(
       'ship--hidden'
     );
@@ -108,7 +106,6 @@ export const dragDropShip = function dragDropShip(
     shipDroppedOnGrid.style.visibility = 'hidden';
     // draggableShips.splice(droppedShipIndex, 1);
     draggableShips[droppedShipIndex] = null;
-    // console.log(draggableShips);
   };
 
   const addShipClass = function addShipClass(grid, shipName, ...coords) {
@@ -139,7 +136,6 @@ export const dragDropShip = function dragDropShip(
     // carrier, battleship, destroyer, submarine, patrolBoat
     addShipClass(playerGrid, shipName, ...coordinateArr);
     droppedShip.classList.remove('flippable');
-    console.log(droppedShip);
     showShip(droppedShip);
     hideShip(droppedShip);
     placeShip(playerGrid, myShips[index], ...coordinateArr);
@@ -160,7 +156,6 @@ export const dragDropShip = function dragDropShip(
       cell.addEventListener('drop', (e) => {
         const shipId = e.dataTransfer.getData('text/plain');
         const droppedShip = document.getElementById(shipId);
-        console.log(droppedShip.id)
         const shipBeingDragged = draggableShips[draggableShips.indexOf(droppedShip)];
         const shipHeadIndex = myPlayerCells.indexOf(cell);
         const gridRowLength = 10;
@@ -180,7 +175,6 @@ export const dragDropShip = function dragDropShip(
           ].classList.contains('player--dropped')
         ) {
           e.preventDefault();
-          console.log(droppedShip);
 
           if (droppedShip.dataset.orientation === 'horizontal' && (shipHeadIndex % gridRowLength) + shipBeingDragged.childElementCount <= gridRowLength) {
             colorDroppedArea(
@@ -203,7 +197,7 @@ export const dragDropShip = function dragDropShip(
               droppedShip
             );
           }
-        } console.log(playerGrid);
+        }
       });
     }
   };
