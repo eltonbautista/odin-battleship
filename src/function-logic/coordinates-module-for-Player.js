@@ -29,10 +29,10 @@ export const coordinatesGenerator = function coordinatesGenerator(
     for (let i = 0; i < shipBeingPlaced[shipIndex].shipArray.length; i += 1) {
       upperHalfOfOneArray.splice(realNum, 1);
       coords.push(arr.splice(arr.indexOf(realNum), 1));
-      console.log(realNum);
+      // console.log(realNum);
       realNum += iterator;
     }
-    console.log(coords);
+    // console.log(coords);
     computerGameboard.placeShip(
       computerGameboardArray,
       shipBeingPlaced[shipIndex],

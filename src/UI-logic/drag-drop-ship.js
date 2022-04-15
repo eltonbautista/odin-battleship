@@ -16,6 +16,13 @@ export const dragDropShip = function dragDropShip(
   myShips
 ) {
   const draggableShips = startMenu();
+  const shipNames = [
+    'carrier',
+    'battleship',
+    'destroyer',
+    'submarine',
+    'patrolBoat',
+  ];
   // const dropGrid = document.querySelector('#player');
   const playerCellsArray = document.querySelectorAll(
     '#main-content > div:first-child > div'
@@ -28,7 +35,7 @@ export const dragDropShip = function dragDropShip(
       // eslint-disable-next-line no-loop-func
       ship.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', ship.id);
-        console.log(e.dataTransfer.items);
+        // console.log(e.dataTransfer.items);
       });
     }
   };
@@ -41,7 +48,13 @@ export const dragDropShip = function dragDropShip(
     shipDroppedOnGrid.style.visibility = 'hidden';
     // draggableShips.splice(droppedShipIndex, 1);
     draggableShips[droppedShipIndex] = null;
-    console.log(draggableShips);
+    // console.log(draggableShips);
+  };
+
+  const addShipClass = function addShipClass(grid, shipName, ...coords) {
+    for (let i = 0; i < coords.length; i += 1) {
+      grid[coords[i]].classList.add(`${shipName}`);
+    }
   };
 
   const colorDroppedArea = function colorDroppedArea(
@@ -50,7 +63,8 @@ export const dragDropShip = function dragDropShip(
     addClass,
     // eslint-disable-next-line no-unused-vars
     index,
-    incrementor
+    incrementor,
+    shipName
   ) {
     const coordinateArr = [];
     let increment = 0;
@@ -62,8 +76,8 @@ export const dragDropShip = function dragDropShip(
       increment += incrementor;
     }
     // carrier, battleship, destroyer, submarine, patrolBoat
-    placeShip(playerGrid, myShips[index], ...coordinateArr);
-    console.log(coordinateArr);
+    // placeShip(playerGrid, myShips[index], ...coordinateArr);
+    addShipClass(playerGrid, shipName, ...coordinateArr);
   };
 
   const makeDroppable = function makeDroppable() {
@@ -81,6 +95,7 @@ export const dragDropShip = function dragDropShip(
       cell.addEventListener('drop', (e) => {
         const shipId = e.dataTransfer.getData('text/plain');
         const droppedShip = document.getElementById(shipId);
+        console.log(droppedShip.id)
         const shipBeingDragged = draggableShips[draggableShips.indexOf(droppedShip)];
         const shipHeadIndex = myPlayerCells.indexOf(cell);
         const gridRowLength = 10;
@@ -106,7 +121,8 @@ export const dragDropShip = function dragDropShip(
             cell,
             'player--dropped',
             draggableShips.indexOf(droppedShip),
-            2
+            1,
+            droppedShip.id
           );
           hideShip(droppedShip);
         }
