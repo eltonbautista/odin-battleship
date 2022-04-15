@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
+import { coordinatesGenerator } from './coordinates-module-for-Player';
 
 export const Player = function playerFactoryFunction(player) {
   // prettier-ignore
@@ -77,10 +78,13 @@ export const Player = function playerFactoryFunction(player) {
     });
   };
 
+  const computerRandomShipPlacement = coordinatesGenerator;
+
   return {
     player,
     getUniqueRandom,
     computerAttack,
     gridMouseEvents,
+    computerRandomShipPlacement,
   };
 };
