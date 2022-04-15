@@ -10,8 +10,8 @@ export const gameFlow = function gameFlow() {
   const humanPlayer = Player('human');
   const computerPlayer = Player('computer');
 
-  const playerGameboard = Gameboard();
-  const computerGameboard = Gameboard();
+  const playerGameboard = Gameboard('player', gameFlow);
+  const computerGameboard = Gameboard('computer', gameFlow);
 
   // eslint-disable-next-line no-unused-vars
   const playerGrid = playerGameboard.renderGrid(100, 'player');

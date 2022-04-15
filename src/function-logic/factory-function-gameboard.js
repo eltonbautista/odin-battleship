@@ -6,8 +6,9 @@
 import { Ship } from './factory-function-ship';
 import { dragDropShip } from '../UI-logic/drag-drop-ship';
 import { startMenu } from '../UI-logic/start-menu';
+import { gameOver } from '../UI-logic/gameover';
 
-export const Gameboard = function GameboardFactoryFunction(player) {
+export const Gameboard = function GameboardFactoryFunction(player, reset) {
   const gameboardArray = [];
   // Here we are making the ship objects.
   const [carrier, battleship, destroyer, submarine, patrolBoat] = [
@@ -62,7 +63,7 @@ export const Gameboard = function GameboardFactoryFunction(player) {
     });
     if (myShips.length === 0) {
       console.log(`Game Over! ${player} has lost!`);
-      return 'Game Over!';
+      gameOver(player, reset);
     }
   };
 
@@ -84,10 +85,10 @@ export const Gameboard = function GameboardFactoryFunction(player) {
       uIGrid[gameboardCoordinate].classList.remove('player--dropped');
       gridArray[gameboardCoordinate]();
       gridArray[gameboardCoordinate] = 0; // shots sent at coordinates that have a ship will turn into a 0.
-      if (checkIfGameOver() === 'Game Over!') {
-        return `${player} has lost!`
-      }
-      // checkIfGameOver();
+      // if (checkIfGameOver() === 'Game Over!') {
+      //   return `${player} has lost!`
+      // }
+      checkIfGameOver(reset);
       return gridArray;
     }
     // prettier-ignore
