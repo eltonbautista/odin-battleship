@@ -16,7 +16,7 @@ export const dragDropShip = function dragDropShip(
   myShips
 ) {
   const draggableShips = startMenu();
-  const dropGrid = document.querySelector('#player');
+  // const dropGrid = document.querySelector('#player');
   const playerCellsArray = document.querySelectorAll(
     '#main-content > div:first-child > div'
   );
@@ -42,7 +42,8 @@ export const dragDropShip = function dragDropShip(
     shipDroppedOnGrid.setAttribute('draggable', 'false');
     shipDroppedOnGrid.style.visibility = 'hidden';
     // draggableShips.splice(droppedShipIndex, 1);
-    // console.log(draggableShips);
+    draggableShips[droppedShipIndex] = null;
+    console.log(draggableShips);
   };
 
   const colorDroppedArea = function colorDroppedArea(

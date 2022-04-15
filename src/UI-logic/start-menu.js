@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable comma-dangle */
 /* eslint-disable import/prefer-default-export */
 // import { dragDropShip } from './drag-drop-ship';
@@ -54,6 +55,13 @@ export const startMenu = function startMenu() {
   const startGameButton = document.createElement('button');
   startGameButton.textContent = 'ゲームを始める';
   designateShipsDiv.append(startGameButton);
+
+  startGameButton.addEventListener('click', (e) => {
+    const emptyShipArray = myShipElements.filter((index) => index !== null);
+    if (emptyShipArray.length === 0) {
+      console.log('works');
+    }
+  });
 
   return myShipElements;
 };
