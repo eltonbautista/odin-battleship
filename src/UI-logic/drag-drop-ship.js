@@ -49,14 +49,17 @@ export const dragDropShip = function dragDropShip(
     startCell,
     addClass,
     // eslint-disable-next-line no-unused-vars
-    index
+    index,
+    incrementor
   ) {
     const coordinateArr = [];
+    let increment = 0;
     for (let i = 0; i < length; i += 1) {
-      myPlayerCells[myPlayerCells.indexOf(startCell) + i].classList.add(
+      myPlayerCells[myPlayerCells.indexOf(startCell) + increment].classList.add(
         `${addClass}`
       );
-      coordinateArr.push(myPlayerCells.indexOf(startCell) + i);
+      coordinateArr.push(myPlayerCells.indexOf(startCell) + increment);
+      increment += incrementor;
     }
     // carrier, battleship, destroyer, submarine, patrolBoat
     placeShip(playerGrid, myShips[index], ...coordinateArr);
@@ -102,7 +105,8 @@ export const dragDropShip = function dragDropShip(
             droppedShip.childElementCount,
             cell,
             'player--dropped',
-            draggableShips.indexOf(droppedShip)
+            draggableShips.indexOf(droppedShip),
+            2
           );
           hideShip(droppedShip);
         }

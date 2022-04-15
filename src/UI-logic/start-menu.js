@@ -70,4 +70,3 @@ export const startMenu = function startMenu() {
 
   return myShipElements;
 };
-// startMenu();
