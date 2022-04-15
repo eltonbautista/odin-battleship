@@ -62,30 +62,5 @@ export const coordinatesGenerator = function coordinatesGenerator(
         placeComputerShips(j, useThisNum, 1, oneArray, secondHalf);
       }
     }
-
-    //     if (uniqueNum < 50 && shipBeingPlaced[j].shipArray.length > 3) {
-    //       // if uniqueNum < 50 (to make sure not to get out of bounds) & ship is either carrier or battleship
-    //       placeComputerShips(j, uniqueNum, 10);
-    //     } else if (uniqueNum > 59 && shipBeingPlaced[j].shipArray.length > 3) {
-    //       const useThisNum =
-    //         uniqueNum - 10 * Math.ceil(shipBeingPlaced[j].shipArray.length + 1);
-    //       placeComputerShips(j, useThisNum, 10);
-    //     } else if (uniqueNum > 89 && shipBeingPlaced[j].shipArray.length > 3) {
-    //       const useThisNum =
-    //         uniqueNum - 10 * Math.ceil(shipBeingPlaced[j].shipArray.length + 1);
-    //       placeComputerShips(j, useThisNum, 10);
-    //     } else if (
-    //       uniqueNum > 50 &&
-    //       (uniqueNum % 10) + shipBeingPlaced[j].shipArray.length > 10 &&
-    //       shipBeingPlaced[j].shipArray.length <= 3
-    //     ) {
-    //       const useThisNum = uniqueNum - shipBeingPlaced[j].shipArray.length;
-    //       placeComputerShips(j, useThisNum, 1);
-    //     } else {
-    //       const useThisNum = uniqueNum - shipBeingPlaced[j].shipArray.length;
-    //       console.log(useThisNum);
-    //       placeComputerShips(j, useThisNum, 1);
-    //     }
-    //     console.log(oneArray.length);
   }
 };
