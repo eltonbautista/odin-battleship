@@ -35,6 +35,9 @@ export const dragDropShip = function dragDropShip(
   const makeDraggable = function makeDraggable() {
     for (const ship of draggableShips) {
       // eslint-disable-next-line no-loop-func
+      if (draggableShips.indexOf(ship) !== 0) {
+        ship.classList.add('ship--hidden');
+      }
       ship.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', ship.id);
         // console.log(e.dataTransfer.items);
@@ -79,6 +82,25 @@ export const dragDropShip = function dragDropShip(
   };
   makeFlippable();
 
+  const showShip = function showShip(droppedShip) {
+    console.log(droppedShip.id);
+    if (droppedShip.id === 'patrolBoat') {
+      droppedShip.classList.remove('ship--visible');
+      droppedShip.classList.add('ship--hidden');
+      return;
+    }
+
+    droppedShip.classList.remove('ship--visible');
+    droppedShip.classList.add('ship--hidden');
+    console.log(draggableShips[draggableShips.indexOf(droppedShip) + 1]);
+    draggableShips[draggableShips.indexOf(droppedShip) + 1].classList.remove(
+      'ship--hidden'
+    );
+    draggableShips[draggableShips.indexOf(droppedShip) + 1].classList.add(
+      'ship--visible'
+    );
+  };
+
   const hideShip = function hideShip(droppedShip) {
     const droppedShipIndex = draggableShips.indexOf(droppedShip);
     const shipDroppedOnGrid = droppedShip;
@@ -118,6 +140,8 @@ export const dragDropShip = function dragDropShip(
     // placeShip(playerGrid, myShips[index], ...coordinateArr);
     addShipClass(playerGrid, shipName, ...coordinateArr);
     droppedShip.classList.remove('flippable');
+    console.log(droppedShip);
+    showShip(droppedShip);
     hideShip(droppedShip);
   };
 
@@ -179,7 +203,6 @@ export const dragDropShip = function dragDropShip(
               droppedShip
             );
           }
-          console.log(playerGrid);
         }
       });
     }
